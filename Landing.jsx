@@ -136,7 +136,7 @@ function RseAfiliados() {
   const row1Ref = React.useRef(null);
   const row2Ref = React.useRef(null);
   React.useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let raf = 0;
     const update = () => {
       raf = 0;
@@ -146,15 +146,23 @@ function RseAfiliados() {
       const vh = window.innerHeight || 800;
       let p = (vh - rect.top) / (rect.height + vh); // 0 entering bottom → 1 leaving top
       p = Math.max(0, Math.min(1, p));
-      const range = Math.min(180, window.innerWidth * 0.22);
-      const shift = (p - 0.5) * 2 * range; // -range … +range
-      if (row1Ref.current) row1Ref.current.style.transform = `translate3d(${-shift}px,0,0)`;
-      if (row2Ref.current) row2Ref.current.style.transform = `translate3d(${shift}px,0,0)`;
+      const range = Math.min(160, window.innerWidth * 0.18);
+      const shift = reduce ? 0 : (p - 0.5) * 2 * range; // -range … +range
+      const cw = el.clientWidth;
+      // Center each over-wide row (margin:auto can't, since the row overflows),
+      // then drift around that center so the shift never exposes a blank edge.
+      const place = (node, dir) => {
+        if (!node) return;
+        const base = (cw - node.scrollWidth) / 2;
+        node.style.transform = `translate3d(${base + dir * shift}px,0,0)`;
+      };
+      place(row1Ref.current, -1);
+      place(row2Ref.current, 1);
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
     update();
-    window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+    if (!reduce) window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
@@ -182,7 +190,7 @@ function RseAfiliados() {
   const rowB = aliados.slice(6, 12);
   // Triple each row so it always overflows the viewport (no blank edges while sliding).
   const fill = (arr) => [...arr, ...arr, ...arr];
-  const rowStyle = { display: 'flex', gap: 16, width: 'max-content', margin: '0 auto', willChange: 'transform' };
+  const rowStyle = { display: 'flex', gap: 16, width: 'max-content', willChange: 'transform' };
 
   return (
     <section ref={sectionRef} id="aliados" style={{ background: 'var(--lavender)', overflow: 'hidden' }}>
