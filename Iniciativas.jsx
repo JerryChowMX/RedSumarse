@@ -59,9 +59,10 @@ function IniHeader() {
 /* ---------- HERO ---------- */
 function IniHero() {
   const Mosaic = window.SumaMosaic;
+  const mobile = window.useIsMobile();
   return (
     <section style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
-      <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />
+      {!mobile && <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />}
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter) var(--space-7)', position: 'relative' }}>
         <IEyebrow>Iniciativas</IEyebrow>
         <h1 style={{

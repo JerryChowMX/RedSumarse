@@ -93,7 +93,7 @@ function ConModule() {
     <React.Fragment>
       {/* HERO */}
       <section style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
-        <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />
+        {!mobile && <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />}
         <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter) var(--space-6)', position: 'relative' }}>
           <CEyebrow>Contacto</CEyebrow>
           <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04, letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0' }}>Hablemos</h1>
@@ -107,7 +107,7 @@ function ConModule() {
       <section style={{ background: 'var(--canvas-white)' }}>
         <div style={{
           maxWidth: 'var(--container-max)', margin: '0 auto', padding: '0 var(--gutter) var(--section-y)',
-          display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.1fr 0.9fr', gap: 48, alignItems: 'start',
+          display: 'grid', gridTemplateColumns: mobile ? 'minmax(0, 1fr)' : '1.1fr 0.9fr', gap: mobile ? 24 : 48, alignItems: 'start',
         }}>
           {/* LEFT — form */}
           <div style={{ background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-8)' }}>
@@ -164,9 +164,9 @@ function ConModule() {
                       <span style={{ width: 42, height: 42, flex: 'none', borderRadius: 'var(--radius-md)', background: 'rgba(255,255,255,0.12)', color: 'var(--sunflower)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <Icon name={row.icon} size={20} strokeWidth={1.9} />
                       </span>
-                      <div>
+                      <div style={{ minWidth: 0 }}>
                         <div style={{ fontSize: 'var(--size-xs)', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--purple-200)' }}>{row.k}</div>
-                        <div style={{ color: 'var(--canvas-white)', fontWeight: 600, fontSize: 'var(--size-md)', marginTop: 3 }}>{row.v}</div>
+                        <div style={{ color: 'var(--canvas-white)', fontWeight: 600, fontSize: 'var(--size-md)', marginTop: 3, overflowWrap: 'anywhere' }}>{row.v}</div>
                       </div>
                     </div>
                   ))}
