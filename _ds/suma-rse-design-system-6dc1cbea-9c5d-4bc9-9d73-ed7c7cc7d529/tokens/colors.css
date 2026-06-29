@@ -1,0 +1,103 @@
+/* SUMA RSE — Color tokens
+ * Brand: Honey Flower (purple) + Sunflower (lime-yellow), warm plum-gray neutrals.
+ * Usage doctrine: neutrals lead, purple is the hero, yellow is reserved for CTAs
+ * and key accents. Avoid large fields of pure yellow (visual fatigue).
+ */
+:root {
+  /* ---- Raw brand anchors ---- */
+  --honey-flower: #58296e;   /* Primary brand */
+  --sunflower:    #e2d300;   /* Brand accent / CTA */
+  --plum-gray:    #211826;   /* Dark neutral / body text */
+  --canvas-white: #fbfbfa;   /* Light neutral background */
+  --lavender:     #f2eef5;   /* Supporting soft background */
+
+  /* ---- Purple scale (Honey Flower) ---- */
+  --purple-50:  #f4eef7;
+  --purple-100: #e7d9ee;
+  --purple-200: #cdb0dc;
+  --purple-300: #ad82c4;
+  --purple-400: #8a53a6;
+  --purple-500: #6b3787;
+  --purple-600: #58296e;  /* brand */
+  --purple-700: #47215a;
+  --purple-800: #361944;
+  --purple-900: #281232;
+
+  /* ---- Yellow scale (Sunflower) ---- */
+  --yellow-50:  #fdfce0;
+  --yellow-100: #faf7b0;
+  --yellow-200: #f3ec6e;
+  --yellow-300: #ecdf2f;
+  --yellow-400: #e2d300;  /* brand */
+  --yellow-500: #c2b500;
+  --yellow-600: #9b9000;
+  --yellow-700: #756c00;
+  --yellow-800: #4f4900;
+
+  /* ---- Warm plum-gray neutral scale ---- */
+  --neutral-0:   #ffffff;
+  --neutral-25:  #fbfbfa;  /* canvas white */
+  --neutral-50:  #f2eef5;  /* lavender */
+  --neutral-100: #e8e2ec;
+  --neutral-200: #d4ccd9;
+  --neutral-300: #b3a8bb;
+  --neutral-400: #8a7e92;
+  --neutral-500: #645a6c;
+  --neutral-600: #463e4d;
+  --neutral-700: #2e2834;
+  --neutral-800: #211826;  /* plum-gray */
+  --neutral-900: #170f1c;
+
+  /* ---- Status (restrained, warm-leaning) ---- */
+  --success: #1f8a5b;
+  --success-soft: #e3f3ea;
+  --warning: #b8860b;
+  --warning-soft: #fbf2d6;
+  --danger:  #b83a2e;
+  --danger-soft: #f8e4e1;
+  --info:    #3a6ea5;
+  --info-soft: #e6eef6;
+
+  /* ===== Semantic aliases ===== */
+  /* Text */
+  --text-body:     var(--plum-gray);
+  --text-heading:  var(--honey-flower);
+  --text-muted:    var(--neutral-500);
+  --text-subtle:   var(--neutral-400);
+  --text-on-dark:  var(--canvas-white);
+  --text-on-accent: var(--plum-gray);
+  --text-link:     var(--purple-600);
+  --text-link-hover: var(--purple-700);
+
+  /* Surfaces */
+  --surface-page:   var(--canvas-white);
+  --surface-card:   var(--neutral-0);
+  --surface-soft:   var(--lavender);
+  --surface-sunken: var(--neutral-100);
+  --surface-brand:  var(--honey-flower);
+  --surface-brand-strong: var(--purple-800);
+  --surface-accent: var(--sunflower);
+  --surface-inverse: var(--plum-gray);
+
+  /* Borders */
+  --border-subtle:  var(--neutral-100);
+  --border-default: var(--neutral-200);
+  --border-strong:  var(--neutral-300);
+  --border-brand:   var(--purple-200);
+  --border-focus:   var(--purple-500);
+
+  /* Interactive — primary (purple) */
+  --btn-primary-bg:       var(--purple-600);
+  --btn-primary-bg-hover: var(--purple-700);
+  --btn-primary-bg-active:var(--purple-800);
+  --btn-primary-text:     var(--canvas-white);
+
+  /* Interactive — CTA (yellow) */
+  --cta-bg:        var(--sunflower);
+  --cta-bg-hover:  var(--yellow-500);
+  --cta-bg-active: var(--yellow-600);
+  --cta-text:      var(--plum-gray);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--purple-500) 35%, transparent);
+}

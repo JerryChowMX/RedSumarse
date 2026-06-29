@@ -1,0 +1,41 @@
+/* SUMA RSE — Typography tokens */
+:root {
+  /* Families */
+  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-text:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+  --weight-extrabold:800;
+
+  /* Fluid heading sizes (pair with --font-display) */
+  --fs-display: clamp(2.75rem, 1.6rem + 4.6vw, 4.5rem); /* @kind other */
+  --fs-h1: clamp(2.1rem, 1.4rem + 2.8vw, 3.25rem); /* @kind other */
+  --fs-h2: clamp(1.6rem, 1.2rem + 1.7vw, 2.35rem); /* @kind other */
+  --fs-h3: clamp(1.3rem, 1.1rem + 0.9vw, 1.65rem); /* @kind other */
+  --fs-h4: 1.25rem; /* @kind other */
+
+  /* Body size ramp (pair with --font-text) */
+  --size-xs:   0.75rem;   /* 12 */
+  --size-sm:   0.875rem;  /* 14 */
+  --size-base: 1rem;      /* 16 */
+  --size-md:   1.125rem;  /* 18 */
+  --size-lg:   1.25rem;   /* 20 */
+  --size-xl:   1.5rem;    /* 24 */
+
+  /* Line heights */
+  --leading-tight:   1.1;
+  --leading-snug:    1.3;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.16em;  /* the "COAHUILA" lockup spacing */
+}
