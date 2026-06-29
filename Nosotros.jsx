@@ -194,7 +194,7 @@ function NosTeam() {
   const mobile = window.useIsMobile();
   const team = [
     { name: 'Alejandro Eichelmann', role: 'Presidente', organization: 'Eichelmann Asesores', photo: 'alejandro-eichelmann.webp' },
-    { name: 'Diana Castilla', role: 'Vicepresidenta', organization: 'Vanguardia' },
+    { name: 'Diana Castilla', role: 'Vicepresidenta', organization: 'Vanguardia', photo: 'diana-castilla.webp' },
     { name: 'Juan Manuel Pérez', role: 'Tesorero', organization: 'Fundación Merced Coahuila', photo: 'juan-manuel-perez.webp' },
     { name: 'Luis Rodríguez', role: 'Comunicación', organization: 'Grupo ALCE', photo: 'luis-rodriguez.webp' },
     { name: 'Ana Cecy Mata', role: 'Comunicación', organization: 'Universidad Carolina', photo: 'ana-cecy-mata.webp' },
