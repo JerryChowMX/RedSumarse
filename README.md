@@ -9,18 +9,16 @@ Sitio web e identidad de marca de **SUMA RSE Coahuila** — una organización si
 
 ## Ver el sitio
 
-- **Rápido (sin servidor):** abre [`index.html`](index.html) directamente en tu navegador. Es la versión *standalone* autocontenida (todo el sitio en un solo archivo).
-- **Con servidor local** (recomendado para desarrollo, usa los archivos fuente):
+El sitio en vivo (Cloudflare Pages) sirve [`index.html`](index.html), que ahora es el **entry multi-archivo editable**: carga los tokens del sistema de diseño y los componentes JSX (`brand.jsx`, `chrome.jsx`, `Landing.jsx`) y los transpila en el navegador con Babel. Para cambiar el contenido (p. ej. el Home), edita **`Landing.jsx`** y haz push — Cloudflare redespliega solo.
+
+- **Con servidor local** (recomendado, así funcionan los imports relativos):
 
   ```bash
-  # Python
   python -m http.server 8080
   # luego abre http://localhost:8080/
   ```
 
-`index.html` y `Red SUMA RSE Coahuila (standalone).html` son la misma compilación autocontenida. El archivo de entrada multi-archivo es [`Red SUMA RSE Coahuila.html`](Red%20SUMA%20RSE%20Coahuila.html), que carga los tokens del sistema de diseño y los componentes JSX (`brand.jsx`, `chrome.jsx`, `Landing.jsx`).
-
-> Nota: el archivo de entrada multi-archivo transpila JSX en el navegador con Babel y necesita servirse vía HTTP (no `file://`). Para abrir con doble clic sin servidor, usa `index.html`.
+> Nota: como transpila JSX en el navegador con Babel, necesita servirse vía **HTTP** (no `file://`). Para abrir con doble clic sin servidor, usa el snapshot autocontenido [`Red SUMA RSE Coahuila (standalone).html`](Red%20SUMA%20RSE%20Coahuila%20(standalone).html) — ojo: es una foto fija del handoff original y **no** incluye cambios posteriores como el banner de aliados.
 
 ---
 
@@ -62,6 +60,7 @@ Doctrina: *los neutros mandan, el morado es el héroe, el amarillo es el acento*
 ## Assets
 
 - `assets/` — lockups del logo (completo, transparente, reverse para fondos oscuros) y el isotipo (mosaico).
+- `assets/afiliados/` — logos de las empresas aliadas que aparecen en el banner "Empresas que ya suman" del Home (optimizados para web).
 - `uploads/` — referencias originales del proceso de diseño.
 
 > **Pendiente:** el sitio usa paneles de "placeholder" honestos donde corresponden fotografías reales. Comparte fotos reales de la comunidad en Saltillo para reemplazarlos.

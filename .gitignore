@@ -16,3 +16,6 @@ yarn-error.log*
 # Logs / temp
 *.log
 *.tmp
+
+# Wrangler / Cloudflare local cache (may contain account data)
+.wrangler/

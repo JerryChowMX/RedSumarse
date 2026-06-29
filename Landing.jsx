@@ -102,6 +102,67 @@ function RseHero() {
   );
 }
 
+/* ---------- ALIADOS (member / affiliate logos) ---------- */
+function RseAfiliados() {
+  const aliados = [
+    { name: 'Aguas de Saltillo', file: 'Aguas_de_Saltillo.png' },
+    { name: 'Arca Continental', file: 'Arca_Continental.png' },
+    { name: 'BorgWarner', file: 'BorgWarner.png' },
+    { name: 'CEMEX', file: 'CEMEX.png' },
+    { name: 'Coconsa', file: 'Coconsa.png' },
+    { name: 'Eichelmann Asesores', file: 'Eichelmann_Asesores.png' },
+    { name: 'GIS', file: 'GIS.png' },
+    { name: 'Grupo Dimakers', file: 'Grupo_Dimakers.png' },
+    { name: 'Holcim', file: 'Holcim.png' },
+    { name: 'Il Mercato', file: 'Il_Mercato.png' },
+    { name: 'Magna', file: 'Magna.png' },
+    { name: 'Vanguardia MX', file: 'Vanguardia_MX.png' },
+  ];
+  const enter = (e) => {
+    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+    e.currentTarget.style.transform = 'translateY(-3px)';
+    const img = e.currentTarget.querySelector('img');
+    if (img) { img.style.filter = 'none'; img.style.opacity = '1'; }
+  };
+  const leave = (e) => {
+    e.currentTarget.style.boxShadow = 'var(--shadow-xs)';
+    e.currentTarget.style.transform = 'none';
+    const img = e.currentTarget.querySelector('img');
+    if (img) { img.style.filter = 'grayscale(100%)'; img.style.opacity = '0.72'; }
+  };
+  return (
+    <section id="aliados" style={{ background: 'var(--lavender)' }}>
+      <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-9) var(--gutter)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'var(--space-7)' }}>
+          <Eyebrow>Aliados</Eyebrow>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>
+            Empresas que ya suman
+          </h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: 'var(--size-lg)', lineHeight: 1.55, margin: '14px auto 0', maxWidth: 560 }}>
+            Organizaciones de Coahuila comprometidas con la responsabilidad social que hacen posible el trabajo de la Red.
+          </p>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 16 }}>
+          {aliados.map((a) => (
+            <div key={a.name} title={a.name} onMouseEnter={enter} onMouseLeave={leave} style={{
+              background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)',
+              border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)',
+              height: 104, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 18px',
+              transition: 'box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out)',
+            }}>
+              <img src={`assets/afiliados/${a.file}`} alt={a.name} loading="lazy" style={{
+                maxWidth: '100%', maxHeight: 72, width: 'auto', height: 'auto', objectFit: 'contain', display: 'block',
+                filter: 'grayscale(100%)', opacity: 0.72,
+                transition: 'filter var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out)',
+              }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- RESULTADOS (impact band) ---------- */
 function RseResultados() {
   const mobile = window.useIsMobile();
@@ -400,7 +461,7 @@ function RseFooter() {
             ))}
           </div>
         </div>
-        {col('Red', [{ label: 'Quiénes somos', id: 'quienes' }, { label: 'Iniciativas', href: 'Iniciativas.html' }, { label: 'Resultados', id: 'resultados' }, { label: 'Historia', id: 'historia' }])}
+        {col('Red', [{ label: 'Quiénes somos', id: 'quienes' }, { label: 'Aliados', id: 'aliados' }, { label: 'Iniciativas', href: 'Iniciativas.html' }, { label: 'Resultados', id: 'resultados' }, { label: 'Historia', id: 'historia' }])}
         {col('Impacto', [{ label: 'Economía' }, { label: 'Sociedad' }, { label: 'Medio ambiente' }, { label: 'Transparencia' }])}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Contacto</div>
@@ -438,6 +499,7 @@ function RseApp() {
       <window.SiteHeader current="inicio" />
       <main>
         <RseHero />
+        <RseAfiliados />
         <RseResultados />
         <RseQuienes />
         <RseIniciativas />
