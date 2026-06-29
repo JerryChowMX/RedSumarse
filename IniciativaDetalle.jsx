@@ -134,9 +134,7 @@ function DetHero({ d }) {
           </div>
           <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '18px 0 0', maxWidth: 520 }}>{d.lead}</p>
           <window.SumaButtonRow style={{ marginTop: 28 }}>
-            {d.active
-              ? <Button variant="cta" size="lg" leadingIcon={<Icon name="heart" size={18} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-              : <Button variant="secondary" size="lg" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = INICIATIVAS['3-0'].file; }}>Ver iniciativa actual</Button>}
+            {!d.active && <Button variant="cta" size="lg" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = INICIATIVAS['3-0'].file; }}>Ver iniciativa actual</Button>}
             <Button variant="ghost" size="lg" leadingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = LIST; }}>Todas las iniciativas</Button>
           </window.SumaButtonRow>
         </div>

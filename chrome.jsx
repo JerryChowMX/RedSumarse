@@ -35,11 +35,6 @@ function SiteHeader({ current }) {
     <Button variant="secondary" size={full ? 'md' : 'sm'} fullWidth={full} leadingIcon={<Icon name="mail" size={16} />}
       disabled={current === 'contacto'} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
   );
-  const donar = (full) => (
-    <Button variant="cta" size={full ? 'md' : 'sm'} fullWidth={full} leadingIcon={<Icon name="heart" size={16} />}
-      disabled={current === 'donar'} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-  );
-
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 40,
@@ -58,7 +53,7 @@ function SiteHeader({ current }) {
               {SITE_NAV.map((l) => navLink(l, false))}
             </nav>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              {contacto(false)}{donar(false)}
+              {contacto(false)}
             </div>
           </React.Fragment>
         )}
@@ -83,7 +78,7 @@ function SiteHeader({ current }) {
         }}>
           {SITE_NAV.map((l) => navLink(l, true))}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 12 }}>
-            {contacto(true)}{donar(true)}
+            {contacto(true)}
           </div>
         </div>
       )}

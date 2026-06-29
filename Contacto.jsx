@@ -172,7 +172,7 @@ function ConModule() {
                   ))}
                 </div>
                 <Button variant="cta" fullWidth size="lg" leadingIcon={<Icon name="whatsapp" size={20} />} style={{ marginTop: 24 }}
-                  onClick={() => { window.open('https://wa.me/528440000000?text=' + encodeURIComponent('Hola, me interesa la Red SUMA RSE Coahuila.'), '_blank', 'noopener'); }}>
+                  onClick={() => { window.open('https://wa.link/m1vblc', '_blank', 'noopener'); }}>
                   Escríbenos por WhatsApp
                 </Button>
                 <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>

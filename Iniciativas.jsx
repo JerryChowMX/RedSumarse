@@ -148,7 +148,6 @@ function IniList() {
                 )}
                 <window.SumaButtonRow style={{ marginTop: 24 }}>
                   <Button variant="primary" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = it.file; }}>Leer más</Button>
-                  {it.active && <Button variant="cta" leadingIcon={<Icon name="heart" size={18} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>}
                 </window.SumaButtonRow>
               </div>
             </article>
@@ -182,8 +181,7 @@ function IniCTA() {
               Cada fase suma más empresas, más alianzas y más impacto. Conversemos sobre cómo participar en la inversión social conjunta de la Red.
             </p>
             <window.SumaButtonRow center>
-              <Button variant="cta" size="lg" leadingIcon={<Icon name="heart" size={18} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-              <Button variant="secondary" size="lg" leadingIcon={<Icon name="mail" size={18} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
+              <Button variant="cta" size="lg" leadingIcon={<Icon name="mail" size={18} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
             </window.SumaButtonRow>
           </div>
         </div>

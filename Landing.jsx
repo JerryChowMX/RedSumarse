@@ -339,7 +339,6 @@ function RseIniciativas() {
             <p style={{ color: 'var(--text-body)', lineHeight: 1.65, fontSize: 'var(--size-md)', margin: '14px 0 28px', maxWidth: 520 }}>{featured.desc}</p>
             <window.SumaButtonRow style={{ marginTop: 'auto' }}>
               <Button variant="primary" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Iniciativa-3-0.html'; }}>Leer más</Button>
-              <Button variant="cta" leadingIcon={<Icon name="heart" size={18} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
             </window.SumaButtonRow>
           </div>
           {/* Version panel — compact banner on top for mobile, side panel on desktop */}
