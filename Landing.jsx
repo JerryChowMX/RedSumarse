@@ -311,7 +311,7 @@ function RseIniciativas() {
   return (
     <section id="iniciativas" style={{ background: 'var(--lavender)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, marginBottom: 'var(--space-7)' }}>
+        <div style={{ display: 'flex', flexDirection: mobile ? 'column' : 'row', alignItems: mobile ? 'flex-start' : 'flex-end', justifyContent: 'space-between', gap: mobile ? 14 : 24, marginBottom: 'var(--space-7)' }}>
           <div style={{ maxWidth: 640 }}>
             <Eyebrow>Iniciativas</Eyebrow>
             <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>
@@ -342,16 +342,23 @@ function RseIniciativas() {
               <Button variant="cta" leadingIcon={<Icon name="heart" size={18} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
             </window.SumaButtonRow>
           </div>
-          {/* Version panel */}
-          <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--honey-flower)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'var(--space-8)' }}>
+          {/* Version panel — compact banner on top for mobile, side panel on desktop */}
+          <div style={{
+            position: 'relative', overflow: 'hidden', background: 'var(--honey-flower)',
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: mobile ? 'var(--space-6) var(--space-7)' : 'var(--space-8)',
+            order: mobile ? -1 : 0,
+          }}>
             <Mosaic size={150} color="rgba(226,211,0,0.18)" style={{ position: 'absolute', top: -16, right: -20 }} />
             <Mosaic size={110} color="rgba(255,255,255,0.10)" style={{ position: 'absolute', bottom: -12, left: -14 }} />
-            <div style={{ position: 'relative' }}>
-              <div style={{ display: 'inline-flex', width: 56, height: 56, borderRadius: 'var(--radius-md)', background: 'rgba(255,255,255,0.12)', color: 'var(--sunflower)', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+            <div style={{ position: 'relative', display: 'flex', flexDirection: mobile ? 'row' : 'column', alignItems: mobile ? 'center' : 'flex-start', gap: mobile ? 16 : 0 }}>
+              <div style={{ display: 'inline-flex', width: 56, height: 56, flex: 'none', borderRadius: 'var(--radius-md)', background: 'rgba(255,255,255,0.12)', color: 'var(--sunflower)', alignItems: 'center', justifyContent: 'center', marginBottom: mobile ? 0 : 20 }}>
                 <Icon name={featured.icon} size={28} strokeWidth={1.9} />
               </div>
-              <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', lineHeight: 0.95, color: 'var(--sunflower)', letterSpacing: '-0.03em' }}>3.0</div>
-              <div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--purple-100)', marginTop: 8 }}>Iniciativa actual</div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: mobile ? '2.6rem' : 'clamp(3.5rem, 6vw, 5.5rem)', lineHeight: 0.95, color: 'var(--sunflower)', letterSpacing: '-0.03em' }}>3.0</div>
+                <div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--purple-100)', marginTop: mobile ? 2 : 8 }}>Iniciativa actual</div>
+              </div>
             </div>
           </div>
         </div>
