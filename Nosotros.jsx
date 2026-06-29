@@ -64,15 +64,16 @@ function NosHero() {
   const { Button } = window.SUMARSEDesignSystem_6dc1cb;
   const Icon = window.SumaIcon;
   const Mosaic = window.SumaMosaic;
+  const mobile = window.useIsMobile();
   return (
     <section style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
-      <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />
+      {!mobile && <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />}
       <div style={{ maxWidth: 'var(--container-narrow)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)', textAlign: 'center', position: 'relative' }}>
         <NEyebrow>Nosotros</NEyebrow>
         <h1 style={{
           fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04,
           letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0',
-        }}>Nosotros</h1>
+        }}>Una red con propósito</h1>
         <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '20px auto 0', maxWidth: 580 }}>
           Somos un equipo dedicado a promover el bienestar social, fomentando actividades de alto impacto que transforman nuestra sociedad.
         </p>
@@ -158,7 +159,7 @@ function NosValores() {
             Lo que nos mueve cada día
           </h2>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(4,1fr)', gap: 20 }}>
           {values.map((v) => (
             <div key={v.value} style={{
               background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-6)',
@@ -215,7 +216,7 @@ function NosTeam() {
             Nuestra filosofía es simple: facilitar alianzas y generar impactos sostenibles.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4,1fr)', gap: mobile ? 14 : 20 }}>
           {team.map((m) => (
             <div key={m.name} style={{
               background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-6)',
