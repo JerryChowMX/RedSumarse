@@ -87,10 +87,10 @@ function DonarModule() {
           <p style={{ fontSize: 'var(--size-lg)', color: 'var(--text-body)', lineHeight: 1.55, margin: '16px 0 28px' }}>
             Tu aportación {monthly ? 'mensual ' : ''}de <strong>${value.toLocaleString('es-MX')} MXN</strong> impulsa la inversión social conjunta de la Red. Te enviaremos tu recibo deducible por correo.
           </p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <window.SumaButtonRow center>
             <Button variant="primary" size="lg" onClick={() => { window.location.href = HOME; }}>Volver al inicio</Button>
             <Button variant="secondary" size="lg" onClick={() => setDone(false)}>Hacer otra aportación</Button>
-          </div>
+          </window.SumaButtonRow>
         </div>
       </section>
     );

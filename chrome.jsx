@@ -146,4 +146,24 @@ function SiteFooter() {
   );
 }
 
-Object.assign(window, { SiteHeader, SiteFooter });
+// Responsive action-button row: side-by-side on desktop, stacked full-width on
+// mobile (so pairs never wrap into uneven widths). Clones Button children to set
+// fullWidth on mobile.
+function ButtonRow({ children, center = false, style }) {
+  const mobile = window.useIsMobile();
+  const kids = React.Children.toArray(children).filter(Boolean).map((c, i) =>
+    React.isValidElement(c)
+      ? React.cloneElement(c, { key: c.key != null ? c.key : i, fullWidth: mobile ? true : c.props.fullWidth })
+      : c
+  );
+  return (
+    <div style={{
+      display: 'flex', flexDirection: mobile ? 'column' : 'row', gap: 12,
+      alignItems: mobile ? 'stretch' : 'center',
+      justifyContent: center ? 'center' : 'flex-start',
+      flexWrap: 'wrap', ...style,
+    }}>{kids}</div>
+  );
+}
+
+Object.assign(window, { SiteHeader, SiteFooter, SumaButtonRow: ButtonRow });

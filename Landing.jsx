@@ -72,31 +72,31 @@ function RseHero() {
   const Mosaic = window.SumaMosaic;
   return (
     <section id="inicio" style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
-      <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />
+      {!mobile && <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />}
       <div style={{
         maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)',
-        display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.05fr 0.95fr', gap: 56, alignItems: 'center', position: 'relative',
+        display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.05fr 0.95fr', gap: mobile ? 36 : 56, alignItems: 'center', position: 'relative',
       }}>
         <div>
           <Eyebrow>Red de empresas socialmente responsables · Coahuila</Eyebrow>
           <h1 style={{
-            fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.02,
+            fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04,
             letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0',
-          }}>Sumamos empresas que<br/>transforman Coahuila</h1>
+          }}>{mobile ? 'Sumamos empresas que transforman Coahuila' : <React.Fragment>Sumamos empresas que<br/>transforman Coahuila</React.Fragment>}</h1>
           <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.55, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 500 }}>
             Unimos a empresas comprometidas con la responsabilidad social para crear un impacto positivo en la economía, la sociedad y el medio ambiente.
           </p>
-          <div style={{ display: 'flex', gap: 12, marginTop: 30, flexWrap: 'wrap' }}>
+          <window.SumaButtonRow style={{ marginTop: 30 }}>
             <Button variant="cta" size="lg" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Iniciativas.html'; }}>Conocer iniciativas</Button>
             <Button variant="secondary" size="lg" leadingIcon={<Icon name="mail" size={18} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
-          </div>
+          </window.SumaButtonRow>
           <div style={{ display: 'flex', gap: 28, marginTop: 38 }}>
             <Stat value="9.2K" label="personas beneficiadas" />
             <div style={{ width: 1, background: 'var(--border-default)' }} />
             <Stat value="$4.2 MDP" label="inversión social" />
           </div>
         </div>
-        <Photo tone="purple" label="Comunidad · Coahuila" style={{ height: 460 }} />
+        <Photo tone="purple" label="Comunidad · Coahuila" style={{ height: mobile ? 300 : 460 }} />
       </div>
     </section>
   );
@@ -337,10 +337,10 @@ function RseIniciativas() {
             </div>
             <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h3)', color: 'var(--text-heading)', margin: 0, letterSpacing: '-0.01em' }}>{featured.title}</h3>
             <p style={{ color: 'var(--text-body)', lineHeight: 1.65, fontSize: 'var(--size-md)', margin: '14px 0 28px', maxWidth: 520 }}>{featured.desc}</p>
-            <div style={{ display: 'flex', gap: 12, marginTop: 'auto', flexWrap: 'wrap' }}>
+            <window.SumaButtonRow style={{ marginTop: 'auto' }}>
               <Button variant="primary" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Iniciativa-3-0.html'; }}>Leer más</Button>
               <Button variant="cta" leadingIcon={<Icon name="heart" size={18} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-            </div>
+            </window.SumaButtonRow>
           </div>
           {/* Version panel */}
           <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--honey-flower)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'var(--space-8)' }}>
