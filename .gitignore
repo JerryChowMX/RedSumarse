@@ -19,3 +19,6 @@ yarn-error.log*
 
 # Wrangler / Cloudflare local cache (may contain account data)
 .wrangler/
+
+# Local preview server config (dev only)
+.claude/launch.json

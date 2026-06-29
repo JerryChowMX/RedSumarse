@@ -130,10 +130,64 @@ function RseAfiliados() {
     const img = e.currentTarget.querySelector('img');
     if (img) { img.style.filter = 'grayscale(100%)'; img.style.opacity = '0.72'; }
   };
+  // Scroll-linked horizontal drift: the two rows slide in opposite directions
+  // as the section travels through the viewport (disabled for reduced motion).
+  const sectionRef = React.useRef(null);
+  const row1Ref = React.useRef(null);
+  const row2Ref = React.useRef(null);
+  React.useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      let p = (vh - rect.top) / (rect.height + vh); // 0 entering bottom → 1 leaving top
+      p = Math.max(0, Math.min(1, p));
+      const range = Math.min(180, window.innerWidth * 0.22);
+      const shift = (p - 0.5) * 2 * range; // -range … +range
+      if (row1Ref.current) row1Ref.current.style.transform = `translate3d(${-shift}px,0,0)`;
+      if (row2Ref.current) row2Ref.current.style.transform = `translate3d(${shift}px,0,0)`;
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  const card = (a, key) => (
+    <div key={key} title={a.name} onMouseEnter={enter} onMouseLeave={leave} style={{
+      flex: 'none', width: 188, height: 104,
+      background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)',
+      border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 22px',
+      transition: 'box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out)',
+    }}>
+      <img src={`assets/afiliados/${a.file}`} alt={a.name} loading="lazy" style={{
+        maxWidth: '100%', maxHeight: 64, width: 'auto', height: 'auto', objectFit: 'contain', display: 'block',
+        filter: 'grayscale(100%)', opacity: 0.72,
+        transition: 'filter var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out)',
+      }} />
+    </div>
+  );
+
+  const rowA = aliados.slice(0, 6);
+  const rowB = aliados.slice(6, 12);
+  // Triple each row so it always overflows the viewport (no blank edges while sliding).
+  const fill = (arr) => [...arr, ...arr, ...arr];
+  const rowStyle = { display: 'flex', gap: 16, width: 'max-content', margin: '0 auto', willChange: 'transform' };
+
   return (
-    <section id="aliados" style={{ background: 'var(--lavender)' }}>
-      <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-9) var(--gutter)' }}>
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-7)' }}>
+    <section ref={sectionRef} id="aliados" style={{ background: 'var(--lavender)', overflow: 'hidden' }}>
+      <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-9) var(--gutter) var(--space-7)' }}>
+        <div style={{ textAlign: 'center' }}>
           <Eyebrow>Aliados</Eyebrow>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>
             Empresas que ya suman
@@ -142,22 +196,10 @@ function RseAfiliados() {
             Organizaciones de Coahuila comprometidas con la responsabilidad social que hacen posible el trabajo de la Red.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))', gap: 16 }}>
-          {aliados.map((a) => (
-            <div key={a.name} title={a.name} onMouseEnter={enter} onMouseLeave={leave} style={{
-              background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)',
-              border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)',
-              height: 104, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '14px 18px',
-              transition: 'box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out)',
-            }}>
-              <img src={`assets/afiliados/${a.file}`} alt={a.name} loading="lazy" style={{
-                maxWidth: '100%', maxHeight: 72, width: 'auto', height: 'auto', objectFit: 'contain', display: 'block',
-                filter: 'grayscale(100%)', opacity: 0.72,
-                transition: 'filter var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out)',
-              }} />
-            </div>
-          ))}
-        </div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '0 0 var(--space-9)' }}>
+        <div ref={row1Ref} style={rowStyle}>{fill(rowA).map((a, i) => card(a, 'a' + i))}</div>
+        <div ref={row2Ref} style={rowStyle}>{fill(rowB).map((a, i) => card(a, 'b' + i))}</div>
       </div>
     </section>
   );

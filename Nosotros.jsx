@@ -192,17 +192,17 @@ function NosValores() {
 /* ---------- CONOCE AL EQUIPO ---------- */
 function NosTeam() {
   const mobile = window.useIsMobile();
-  const { Avatar } = window.SUMARSEDesignSystem_6dc1cb;
   const team = [
-    { name: 'Alejandro Eichelmann', role: 'Presidente', organization: 'Arca Continental' },
+    { name: 'Alejandro Eichelmann', role: 'Presidente', organization: 'Eichelmann Asesores', photo: 'alejandro-eichelmann.webp' },
     { name: 'Diana Castilla', role: 'Vicepresidenta', organization: 'Vanguardia' },
-    { name: 'Juan Manuel Pérez', role: 'Tesorero', organization: 'Fundación Merced Coahuila' },
-    { name: 'Luis Rodríguez', role: 'Comunicación', organization: 'Grupo ALCE' },
-    { name: 'Ana Cecilia Mata', role: 'Comunicación', organization: 'Universidad Carolina' },
-    { name: 'Mireya Plata', role: 'Consejera honoraria · Voluntaria', organization: 'Voluntariado' },
-    { name: 'Eliza Valdez', role: 'Consejera honoraria', organization: 'AIERA' },
-    { name: 'Rafael Peña', role: 'Consejero honorario · Voluntario', organization: 'Fordemex' },
+    { name: 'Juan Manuel Pérez', role: 'Tesorero', organization: 'Fundación Merced Coahuila', photo: 'juan-manuel-perez.webp' },
+    { name: 'Luis Rodríguez', role: 'Comunicación', organization: 'Grupo ALCE', photo: 'luis-rodriguez.webp' },
+    { name: 'Ana Cecy Mata', role: 'Comunicación', organization: 'Universidad Carolina', photo: 'ana-cecy-mata.webp' },
+    { name: 'Mireya Plata', role: 'Consejera honoraria · Voluntaria', organization: 'Voluntariado', photo: 'mireya-plata.webp' },
+    { name: 'Elisa Valdez', role: 'Consejera honoraria', organization: 'AIERA', photo: 'elisa-valdez.webp' },
+    { name: 'Rafael Peña', role: 'Consejero honorario · Voluntario', organization: 'Fordemex', photo: 'rafael-pena.webp' },
   ];
+  const initials = (n) => n.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
   return (
     <section id="equipo" style={{ background: 'var(--canvas-white)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)' }}>
@@ -222,7 +222,16 @@ function NosTeam() {
               border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)',
               display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 6,
             }}>
-              <Avatar name={m.name} size="xl" style={{ marginBottom: 6 }} />
+              <div style={{
+                width: 104, height: 104, flex: 'none', borderRadius: '50%', overflow: 'hidden', marginBottom: 10,
+                border: '3px solid var(--purple-50)', boxShadow: 'var(--shadow-xs)', background: 'var(--lavender)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {m.photo
+                  ? <img src={`assets/equipo/${m.photo}`} alt={m.name} loading="lazy"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                  : <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 32, color: 'var(--purple-400)' }}>{initials(m.name)}</span>}
+              </div>
               <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--size-md)', color: 'var(--text-heading)', lineHeight: 1.2 }}>{m.name}</div>
               <div style={{ color: 'var(--purple-600)', fontWeight: 700, fontSize: 'var(--size-sm)' }}>{m.role}</div>
               <div style={{ color: 'var(--text-muted)', fontSize: 'var(--size-sm)' }}>{m.organization}</div>
