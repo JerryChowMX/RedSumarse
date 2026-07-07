@@ -165,7 +165,7 @@ function NosTeam() {
     { name: 'Juan Manuel Pérez Cuéllar', role: 'Tesorero', organization: 'Fundación Merced Coahuila', photo: 'juan-manuel-perez.webp' },
     { name: 'Mariana Wheelock', role: 'Secretaria', photo: 'mariana-wheelock.webp' },
     { name: 'Mireya Plata', role: 'Vocal', photo: 'mireya-plata.webp' },
-    { name: 'Elisa Valdés', role: 'Vocal', organization: 'AIERA', photo: 'elisa-valdez.webp' },
+    { name: 'Elisa Valdés', role: 'Vocal', photo: 'elisa-valdez.webp' },
   ];
   const initials = (n) => n.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
   return (
