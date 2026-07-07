@@ -16,7 +16,6 @@ function RseHero() {
   const { Button, Stat } = window.SUMARSEDesignSystem_6dc1cb;
   const mobile = window.useIsMobile();
   const Icon = window.SumaIcon;
-  const Photo = window.SumaPhoto;
   const Mosaic = window.SumaMosaic;
   return (
     <section id="inicio" style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
@@ -53,7 +52,10 @@ function RseHero() {
           </window.SumaReveal>
         </div>
         <window.SumaReveal delay={150} y={28}>
-          <Photo tone="purple" label="Comunidad · Coahuila" style={{ height: mobile ? 300 : 460 }} />
+          <img src="assets/iniciativas/1-0/recorrido-grupo.webp" alt="Niñas y niños saludando durante un recorrido en la Sierra de Zapalinamé" style={{
+            width: '100%', height: mobile ? 300 : 460, objectFit: 'cover', display: 'block',
+            borderRadius: 'var(--radius-xl)', boxShadow: 'var(--shadow-md)',
+          }} />
         </window.SumaReveal>
       </div>
     </section>
@@ -216,7 +218,6 @@ function RseResultados() {
 /* ---------- QUIÉNES SOMOS (who / what / why) ---------- */
 function RseQuienes() {
   const mobile = window.useIsMobile();
-  const Photo = window.SumaPhoto;
   const Icon = window.SumaIcon;
   const blocks = [
     { kicker: 'Quiénes somos', icon: 'building', text: 'Una red de empresas de Coahuila unidas por la sostenibilidad y la cultura ASG (Ambiental, Social y de Gobernanza), que deciden trabajar juntas en lugar de hacerlo por separado.' },
@@ -255,7 +256,10 @@ function RseQuienes() {
           </div>
         </div>
         <window.SumaReveal delay={150}>
-          <Photo tone="lavender" label="Empresas de la Red" style={{ height: 420 }} />
+          <img src="assets/iniciativas/2-0/brigadistas-panoramica.webp" alt="Brigadistas de la Red reunidos en campo" style={{
+            width: '100%', height: 420, objectFit: 'cover', display: 'block',
+            borderRadius: 'var(--radius-xl)', boxShadow: 'var(--shadow-md)',
+          }} />
         </window.SumaReveal>
       </div>
     </section>
