@@ -214,11 +214,16 @@ function NosFacebook() {
   const mobile = window.useIsMobile();
   const { Button } = window.SUMARSEDesignSystem_6dc1cb;
   const Icon = window.SumaIcon;
-  const Photo = window.SumaPhoto;
+  const collage = [
+    { src: 'assets/iniciativas/2-0/brigada-grupo.webp', alt: 'Brigadistas de la Red', span: 2 },
+    { src: 'assets/iniciativas/3-0/lanzamiento-podio.webp', alt: 'Lanzamiento de iniciativa' },
+    { src: 'assets/iniciativas/1-0/asistentes.webp', alt: 'Comunidad en Zapalinamé' },
+    { src: 'assets/iniciativas/2-0/trabajo-comunitario.webp', alt: 'Voluntariado en comunidad', span: 2 },
+  ];
   return (
     <section style={{ background: 'var(--lavender)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '0.95fr 1.05fr', gap: 56, alignItems: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '0.95fr 1.05fr', gap: mobile ? 36 : 56, alignItems: 'center' }}>
           <window.SumaReveal>
             <NEyebrow>Comunidad</NEyebrow>
             <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>
@@ -230,14 +235,16 @@ function NosFacebook() {
             <Button variant="primary" size="lg" leadingIcon={<Icon name="facebook" size={18} />}
               onClick={() => { window.open('https://www.facebook.com/RedSumaRSE/', '_blank', 'noopener'); }}>Síguenos</Button>
           </window.SumaReveal>
-          <window.SumaReveal delay={150}>
-            <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gridTemplateRows: 'repeat(2, 150px)', gap: 12 }}>
-              <Photo tone="purple" label="Equipo" style={{ gridColumn: 'span 2', gridRow: 'span 1' }} />
-              <Photo tone="lavender" label="Evento" />
-              <Photo tone="lavender" label="Comunidad" />
-              <Photo tone="plum" label="Voluntariado" style={{ gridColumn: 'span 2', gridRow: 'span 1' }} />
-            </div>
-          </window.SumaReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gridAutoRows: mobile ? '130px' : '165px', gap: 12 }}>
+            {collage.map((ph, i) => (
+              <window.SumaReveal key={ph.src} delay={120 + i * 90} y={20} style={{ gridColumn: ph.span === 2 ? 'span 2' : 'auto' }}>
+                <img src={ph.src} alt={ph.alt} title={ph.alt} loading="lazy" style={{
+                  width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+                  borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-sm)',
+                }} />
+              </window.SumaReveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
