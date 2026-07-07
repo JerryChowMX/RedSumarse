@@ -13,39 +13,19 @@ function CEyebrow({ children, onDark }) {
   );
 }
 
-/* ---------- CONTACT FORM + INFO ---------- */
+/* ---------- CONTACT (WhatsApp-first, no form) ---------- */
 function ConModule() {
-  const { Button, Checkbox, Input, Select, Alert } = window.SUMARSEDesignSystem_6dc1cb;
+  const { Button, Alert } = window.SUMARSEDesignSystem_6dc1cb;
   const mobile = window.useIsMobile();
   const Icon = window.SumaIcon;
   const Mosaic = window.SumaMosaic;
   const Photo = window.SumaPhoto;
 
-  const [form, setForm] = React.useState({ nombre: '', correo: '', empresa: '', asunto: 'Información general', mensaje: '' });
-  const [sent, setSent] = React.useState(false);
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
-  const valid = form.nombre.trim() && /\S+@\S+\.\S+/.test(form.correo) && form.mensaje.trim();
-
-  const asuntos = [
-    'Información general',
-    'Quiero que mi empresa se sume a la Red',
-    'Voluntariado',
-    'Donaciones e inversión social',
-    'Prensa y medios',
-  ];
-
   const info = [
     { icon: 'map-pin', k: 'Dónde estamos', v: 'Blvd. Venustiano Carranza 2905-A, Col. La Salle, Saltillo, Coahuila. C.P. 25240' },
-    { icon: 'mail', k: 'Correo', v: 'contacto@redsumarse.info' },
-    { icon: 'phone', k: 'Teléfono', v: '(844) 592-3466' },
+    { icon: 'mail', k: 'Correo', v: 'contacto@redsumarse.info', href: 'mailto:contacto@redsumarse.info' },
+    { icon: 'phone', k: 'Teléfono', v: '(844) 592-3466', href: 'tel:+528445923466' },
   ];
-
-  const textareaStyle = {
-    width: '100%', minHeight: 132, resize: 'vertical', padding: '11px 14px',
-    fontFamily: 'var(--font-text)', fontSize: 'var(--size-base)', color: 'var(--text-body)', lineHeight: 1.5,
-    background: 'var(--surface-card)', border: '1.5px solid var(--border-default)',
-    borderRadius: 'var(--radius-md)', outline: 'none', boxSizing: 'border-box',
-  };
 
   return (
     <React.Fragment>
@@ -59,71 +39,29 @@ function ConModule() {
           </window.SumaReveal>
           <window.SumaReveal delay={120}>
             <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 560 }}>
-              ¿Tu empresa quiere sumar, te interesa el voluntariado o tienes una pregunta? Escríbenos y te respondemos pronto.
+              ¿Tu empresa quiere sumar, te interesa el voluntariado o tienes una pregunta? Escríbenos por WhatsApp y te respondemos pronto.
             </p>
           </window.SumaReveal>
         </div>
       </section>
 
-      {/* FORM + INFO */}
+      {/* CONTACT CARD + PHOTO */}
       <section style={{ background: 'var(--canvas-white)' }}>
         <div style={{
           maxWidth: 'var(--container-max)', margin: '0 auto', padding: '0 var(--gutter) var(--section-y)',
           display: 'grid', gridTemplateColumns: mobile ? 'minmax(0, 1fr)' : '1.1fr 0.9fr', gap: mobile ? 24 : 48, alignItems: 'start',
         }}>
-          {/* LEFT — form */}
+          {/* LEFT — WhatsApp / datos de contacto */}
           <window.SumaReveal y={24} style={{ minWidth: 0 }}>
-          <div style={{ background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-8)' }}>
-            {sent ? (
-              <div style={{ textAlign: 'center', padding: 'var(--space-7) 0' }}>
-                <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'var(--success)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
-                  <Icon name="check" size={38} />
-                </div>
-                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h3)', color: 'var(--text-heading)', margin: 0 }}>¡Gracias por escribir!</h2>
-                <p style={{ color: 'var(--text-body)', lineHeight: 1.6, margin: '12px auto 24px', maxWidth: 380 }}>
-                  Recibimos tu mensaje. Te responderemos al correo <strong>{form.correo}</strong> lo antes posible.
-                </p>
-                <Button variant="secondary" onClick={() => { setSent(false); setForm({ nombre: '', correo: '', empresa: '', asunto: 'Información general', mensaje: '' }); }}>Enviar otro mensaje</Button>
-              </div>
-            ) : (
-              <React.Fragment>
-                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h3)', color: 'var(--text-heading)', margin: '0 0 6px' }}>Escríbenos</h2>
-                <p style={{ color: 'var(--text-muted)', margin: '0 0 24px' }}>Los campos con * son obligatorios.</p>
-                <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 16, marginBottom: 16 }}>
-                  <Input label="Nombre *" placeholder="Tu nombre" value={form.nombre} onChange={set('nombre')} />
-                  <Input label="Correo *" placeholder="tu@correo.com" value={form.correo} onChange={set('correo')} leadingIcon={<Icon name="mail" size={18} />} />
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1fr 1fr', gap: 16, marginBottom: 16 }}>
-                  <Input label="Empresa u organización" placeholder="Opcional" value={form.empresa} onChange={set('empresa')} leadingIcon={<Icon name="building" size={18} />} />
-                  <Select label="Asunto" options={asuntos} value={form.asunto} onChange={set('asunto')} />
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 18 }}>
-                  <label htmlFor="mensaje" style={{ fontSize: 'var(--size-sm)', fontWeight: 600, color: 'var(--text-body)' }}>Mensaje *</label>
-                  <textarea id="mensaje" placeholder="Cuéntanos en qué podemos ayudarte..." value={form.mensaje} onChange={set('mensaje')}
-                    style={textareaStyle}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = 'var(--border-focus)'; e.currentTarget.style.boxShadow = 'var(--focus-ring)'; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = 'var(--border-default)'; e.currentTarget.style.boxShadow = 'none'; }}
-                  />
-                </div>
-                <Checkbox label="Acepto el aviso de privacidad de la Red SUMA RSE." defaultChecked />
-                <div style={{ marginTop: 24 }}>
-                  <Button variant="cta" size="lg" fullWidth leadingIcon={<Icon name="mail" size={18} />} disabled={!valid} onClick={() => setSent(true)}>
-                    Enviar mensaje
-                  </Button>
-                </div>
-              </React.Fragment>
-            )}
-          </div>
-          </window.SumaReveal>
-
-          {/* RIGHT — info (sticky container — do NOT wrap it in SumaReveal) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, position: mobile ? 'static' : 'sticky', top: 90 }}>
-            <window.SumaReveal delay={100}>
-            <div style={{ background: 'var(--honey-flower)', borderRadius: 'var(--radius-xl)', padding: 'var(--space-7)', position: 'relative', overflow: 'hidden' }}>
-              <Mosaic size={140} color="rgba(226,211,0,0.16)" style={{ position: 'absolute', top: -16, right: -16 }} />
+            <div style={{ background: 'var(--honey-flower)', borderRadius: 'var(--radius-xl)', padding: mobile ? 'var(--space-7)' : 'var(--space-8)', position: 'relative', overflow: 'hidden' }}>
+              <Mosaic size={160} color="rgba(226,211,0,0.16)" style={{ position: 'absolute', top: -18, right: -18 }} />
+              <Mosaic size={120} color="rgba(255,255,255,0.08)" style={{ position: 'absolute', bottom: -14, left: -16 }} />
               <div style={{ position: 'relative' }}>
                 <CEyebrow onDark>Datos de contacto</CEyebrow>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginTop: 22 }}>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h3)', color: 'var(--canvas-white)', margin: '14px 0 0' }}>
+                  El camino más corto: WhatsApp
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 18, marginTop: 24 }}>
                   {info.map((row) => (
                     <div key={row.k} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                       <span style={{ width: 42, height: 42, flex: 'none', borderRadius: 'var(--radius-md)', background: 'rgba(255,255,255,0.12)', color: 'var(--sunflower)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -131,12 +69,14 @@ function ConModule() {
                       </span>
                       <div style={{ minWidth: 0 }}>
                         <div style={{ fontSize: 'var(--size-xs)', fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--purple-200)' }}>{row.k}</div>
-                        <div style={{ color: 'var(--canvas-white)', fontWeight: 600, fontSize: 'var(--size-md)', marginTop: 3, overflowWrap: 'anywhere' }}>{row.v}</div>
+                        {row.href
+                          ? <a href={row.href} style={{ color: 'var(--canvas-white)', fontWeight: 600, fontSize: 'var(--size-md)', marginTop: 3, overflowWrap: 'anywhere', display: 'inline-block', textDecoration: 'none' }}>{row.v}</a>
+                          : <div style={{ color: 'var(--canvas-white)', fontWeight: 600, fontSize: 'var(--size-md)', marginTop: 3, overflowWrap: 'anywhere' }}>{row.v}</div>}
                       </div>
                     </div>
                   ))}
                 </div>
-                <Button variant="cta" fullWidth size="lg" leadingIcon={<Icon name="whatsapp" size={20} />} style={{ marginTop: 24 }}
+                <Button variant="cta" fullWidth size="lg" leadingIcon={<Icon name="whatsapp" size={20} />} style={{ marginTop: 28 }}
                   onClick={() => { window.open('https://wa.link/m1vblc', '_blank', 'noopener'); }}>
                   Escríbenos por WhatsApp
                 </Button>
@@ -154,11 +94,14 @@ function ConModule() {
                 </div>
               </div>
             </div>
+          </window.SumaReveal>
+
+          {/* RIGHT — photo + note */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+            <window.SumaReveal delay={150}>
+              <Photo tone="lavender" label="Saltillo, Coahuila" style={{ height: mobile ? 220 : 320 }} />
             </window.SumaReveal>
-            <window.SumaReveal delay={200}>
-              <Photo tone="lavender" label="Saltillo, Coahuila" style={{ height: 200 }} />
-            </window.SumaReveal>
-            <window.SumaReveal delay={300}>
+            <window.SumaReveal delay={250}>
               <Alert variant="info" icon={<Icon name="check-circle" size={20} />}>Respondemos en un plazo de 2 a 3 días hábiles.</Alert>
             </window.SumaReveal>
           </div>
