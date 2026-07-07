@@ -15,6 +15,15 @@ const INICIATIVAS = {
       'Mejora del clima escolar y del vínculo con las y los estudiantes.',
     ],
     gallery: ['Capacitación docente', 'Sesión en aula', 'Equipo facilitador', 'Comunidad escolar', 'Jornada de bienestar'],
+    photos: {
+      hero: { src: 'assets/iniciativas/3-0/lanzamiento-presidium.webp', alt: 'Lanzamiento de la Iniciativa 3.0 con aliados y autoridades' },
+      gallery: [
+        { src: 'assets/iniciativas/3-0/lanzamiento-podio.webp', alt: 'Lanzamiento de Bienestar Educativo 3.0', w: 2 },
+        { src: 'assets/iniciativas/3-0/entrega-equipo.webp', alt: 'Entrega de equipo a la comunidad escolar' },
+        { src: 'assets/iniciativas/3-0/firma-convenio.webp', alt: 'Firma del convenio con autoridades', w: 2 },
+        { src: 'assets/iniciativas/3-0/entrega-materiales.webp', alt: 'Entrega de materiales' },
+      ],
+    },
   },
   '2-0': {
     file: 'Iniciativa-2-0.html', num: '2.0', version: 'Iniciativa 2.0', status: 'Terminada', active: false,
