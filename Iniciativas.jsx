@@ -13,48 +13,6 @@ function IEyebrow({ children, onDark }) {
   );
 }
 
-/* ---------- HEADER ---------- */
-function IniHeader() {
-  const { Button } = window.SUMARSEDesignSystem_6dc1cb;
-  const Icon = window.SumaIcon;
-  const links = [
-    { label: 'Inicio', href: HOME },
-    { label: 'Iniciativas', href: '#', current: true },
-    { label: 'Nosotros', href: 'Nosotros.html' },
-  ];
-  return (
-    <header style={{
-      position: 'sticky', top: 0, zIndex: 30,
-      background: 'color-mix(in srgb, var(--canvas-white) 88%, transparent)',
-      backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border-subtle)',
-    }}>
-      <div style={{
-        maxWidth: 'var(--container-max)', margin: '0 auto', padding: '14px var(--gutter)',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
-      }}>
-        <a href={HOME} style={{ display: 'flex' }}><window.SumaLogo height={38} /></a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          {links.map((l) => (
-            <a key={l.label} href={l.href} onClick={l.current ? (e) => e.preventDefault() : undefined}
-              style={{
-                padding: '8px 14px', borderRadius: 'var(--radius-md)', textDecoration: 'none',
-                fontFamily: 'var(--font-text)', fontSize: 'var(--size-base)', fontWeight: l.current ? 700 : 500,
-                color: l.current ? 'var(--text-heading)' : 'var(--text-body)',
-                background: l.current ? 'var(--surface-soft)' : 'transparent',
-              }}
-              onMouseEnter={(e) => { if (!l.current) e.currentTarget.style.background = 'var(--surface-soft)'; }}
-              onMouseLeave={(e) => { if (!l.current) e.currentTarget.style.background = 'transparent'; }}
-            >{l.label}</a>
-          ))}
-        </nav>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Button variant="secondary" size="sm" leadingIcon={<Icon name="mail" size={16} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
-          <Button variant="cta" size="sm" leadingIcon={<Icon name="heart" size={16} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 /* ---------- HERO ---------- */
 function IniHero() {
@@ -64,14 +22,18 @@ function IniHero() {
     <section style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
       {!mobile && <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />}
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter) var(--space-7)', position: 'relative' }}>
-        <IEyebrow>Iniciativas</IEyebrow>
-        <h1 style={{
-          fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04,
-          letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0', maxWidth: 760,
-        }}>Acciones y resultados</h1>
-        <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 600 }}>
-          Sumando esfuerzos para una mayor capacidad de actuar como propulsores de cambio en la sociedad. Cada iniciativa es una fase de nuestra inversión social conjunta.
-        </p>
+        <window.SumaReveal>
+          <IEyebrow>Iniciativas</IEyebrow>
+          <h1 style={{
+            fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04,
+            letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0', maxWidth: 760,
+          }}>Acciones y resultados</h1>
+        </window.SumaReveal>
+        <window.SumaReveal delay={120}>
+          <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 600 }}>
+            Sumando esfuerzos para una mayor capacidad de actuar como propulsores de cambio en la sociedad. Cada iniciativa es una fase de nuestra inversión social conjunta.
+          </p>
+        </window.SumaReveal>
       </div>
     </section>
   );
@@ -86,8 +48,8 @@ function IniList() {
 
   const items = [
     {
-      num: '3.0', version: 'Iniciativa 3.0', status: 'En curso', active: true, icon: 'graduation', file: 'Iniciativa-3-0.html',
-      title: 'Educación para el Bienestar', focus: 'Educación · Bienestar socioemocional',
+      num: '3.0', version: 'Iniciativa 3.0', status: 'Terminada', active: false, icon: 'graduation', file: 'Iniciativa-3-0.html',
+      title: 'Educar para el Bienestar', focus: 'Educación · Bienestar socioemocional',
       desc: 'Capacitación a profesionales de la educación para desarrollar sus capacidades socioemocionales, mejorando su desempeño docente, el clima de las aulas y el cuidado y aprendizaje de niñas, niños y jóvenes.',
       stat: null,
     },
@@ -99,7 +61,7 @@ function IniList() {
     },
     {
       num: '1.0', version: 'Iniciativa 1.0', status: 'Terminada', active: false, icon: 'map-pin', file: 'Iniciativa-1-0.html',
-      title: 'Zapalinamé como salón de clases', focus: 'Educación ambiental · Niñez',
+      title: 'Zapalinamé como tu salón de clases', focus: 'Educación ambiental · Niñez',
       desc: 'Realizamos recorridos escolares informativos y de concientización con niñas y niños de 5.º de primaria de escuelas públicas, usando la sierra como aula viva.',
       stat: { value: '+4,800', label: 'niñas y niños participantes' },
     },
@@ -109,8 +71,9 @@ function IniList() {
     <section style={{ background: 'var(--lavender)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-          {items.map((it) => (
-            <article key={it.num} style={{
+          {items.map((it, i) => (
+            <window.SumaReveal key={it.num} delay={i * 110} y={26}>
+            <article style={{
               background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)', overflow: 'hidden',
               border: it.active ? '2px solid var(--purple-300)' : '1px solid var(--border-subtle)',
               boxShadow: it.active ? 'var(--shadow-md)' : 'var(--shadow-xs)',
@@ -143,7 +106,7 @@ function IniList() {
                 <p style={{ color: 'var(--text-body)', lineHeight: 1.65, fontSize: 'var(--size-md)', margin: '12px 0 0', maxWidth: 620 }}>{it.desc}</p>
                 {it.stat && (
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 18 }}>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--size-xl)', color: 'var(--honey-flower)' }}>{it.stat.value}</span>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--size-xl)', color: 'var(--honey-flower)' }}><window.SumaCountUp value={it.stat.value} /></span>
                     <span style={{ color: 'var(--text-muted)', fontSize: 'var(--size-sm)' }}>{it.stat.label}</span>
                   </div>
                 )}
@@ -152,6 +115,7 @@ function IniList() {
                 </window.SumaButtonRow>
               </div>
             </article>
+            </window.SumaReveal>
           ))}
         </div>
       </div>
@@ -173,7 +137,7 @@ function IniCTA() {
         }}>
           <Mosaic size={200} color="rgba(226,211,0,0.16)" style={{ position: 'absolute', bottom: -24, right: 28 }} />
           <Mosaic size={150} color="rgba(255,255,255,0.06)" style={{ position: 'absolute', top: -16, left: 32 }} />
-          <div style={{ position: 'relative', maxWidth: 640, margin: '0 auto' }}>
+          <window.SumaReveal style={{ position: 'relative', maxWidth: 640, margin: '0 auto' }}>
             <IEyebrow onDark>Próxima fase</IEyebrow>
             <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--canvas-white)', margin: '14px 0 0' }}>
               Suma tu empresa a la siguiente iniciativa
@@ -184,67 +148,13 @@ function IniCTA() {
             <window.SumaButtonRow center>
               <Button variant="cta" size="lg" leadingIcon={<Icon name="mail" size={18} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
             </window.SumaButtonRow>
-          </div>
+          </window.SumaReveal>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- FOOTER ---------- */
-function IniFooter() {
-  const Icon = window.SumaIcon;
-  const col = (title, items) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{title}</div>
-      {items.map((it) => (
-        <a key={it.label} href={it.href || '#'} onClick={it.href ? undefined : (e) => e.preventDefault()}
-          style={{ color: 'var(--purple-100)', textDecoration: 'none', fontSize: 'var(--size-base)' }}>{it.label}</a>
-      ))}
-    </div>
-  );
-  return (
-    <footer style={{ background: 'var(--purple-800)', color: 'var(--canvas-white)' }}>
-      <div style={{
-        maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-8) var(--gutter) var(--space-6)',
-        display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1.1fr', gap: 40,
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 320 }}>
-          <window.SumaFooterBrand />
-          <p style={{ margin: 0, color: 'var(--purple-100)', lineHeight: 1.6, fontSize: 'var(--size-base)' }}>
-            Red de empresas socialmente responsables de Coahuila. Donde hay unidad, siempre hay victoria.
-          </p>
-          <div style={{ display: 'flex', gap: 10 }}>
-            {['instagram', 'facebook', 'linkedin'].map((n) => (
-              <a key={n} href="#" onClick={(e) => e.preventDefault()} aria-label={n} style={{
-                width: 38, height: 38, borderRadius: 'var(--radius-md)', display: 'inline-flex',
-                alignItems: 'center', justifyContent: 'center', color: 'var(--purple-900)', background: 'var(--sunflower)',
-              }}><Icon name={n} size={20} /></a>
-            ))}
-          </div>
-        </div>
-        {col('Red', [{ label: 'Quiénes somos', href: HOME + '#quienes' }, { label: 'Iniciativas', href: 'Iniciativas.html' }, { label: 'Resultados', href: HOME + '#resultados' }, { label: 'Nosotros', href: 'Nosotros.html' }])}
-        {col('Impacto', [{ label: 'Economía' }, { label: 'Sociedad' }, { label: 'Medio ambiente' }, { label: 'Transparencia' }])}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Contacto</div>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="map-pin" size={18} /> Saltillo, Coahuila</span>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="mail" size={18} /> contacto@redsumarse.org</span>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="phone" size={18} /> (844) 000 0000</span>
-        </div>
-      </div>
-      <div style={{ borderTop: '1px solid var(--purple-700)' }}>
-        <div style={{
-          maxWidth: 'var(--container-max)', margin: '0 auto', padding: '18px var(--gutter)',
-          display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12,
-          color: 'var(--purple-200)', fontSize: 'var(--size-sm)',
-        }}>
-          <span>© 2026 Red SUMA RSE Coahuila.</span>
-          <span>Aviso de privacidad · Términos</span>
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 function IniApp() {
   return (

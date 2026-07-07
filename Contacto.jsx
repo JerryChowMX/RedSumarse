@@ -13,48 +13,6 @@ function CEyebrow({ children, onDark }) {
   );
 }
 
-/* ---------- HEADER ---------- */
-function ConHeader() {
-  const { Button } = window.SUMARSEDesignSystem_6dc1cb;
-  const Icon = window.SumaIcon;
-  const links = [
-    { label: 'Inicio', href: HOME },
-    { label: 'Iniciativas', href: 'Iniciativas.html' },
-    { label: 'Nosotros', href: 'Nosotros.html' },
-  ];
-  return (
-    <header style={{
-      position: 'sticky', top: 0, zIndex: 30,
-      background: 'color-mix(in srgb, var(--canvas-white) 88%, transparent)',
-      backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border-subtle)',
-    }}>
-      <div style={{
-        maxWidth: 'var(--container-max)', margin: '0 auto', padding: '14px var(--gutter)',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
-      }}>
-        <a href={HOME} style={{ display: 'flex' }}><window.SumaLogo height={38} /></a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          {links.map((l) => (
-            <a key={l.label} href={l.href}
-              style={{
-                padding: '8px 14px', borderRadius: 'var(--radius-md)', textDecoration: 'none',
-                fontFamily: 'var(--font-text)', fontSize: 'var(--size-base)', fontWeight: 500,
-                color: 'var(--text-body)', background: 'transparent',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--surface-soft)'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; }}
-            >{l.label}</a>
-          ))}
-        </nav>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Button variant="secondary" size="sm" leadingIcon={<Icon name="mail" size={16} />} disabled>Contacto</Button>
-          <Button variant="cta" size="sm" leadingIcon={<Icon name="heart" size={16} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 /* ---------- CONTACT FORM + INFO ---------- */
 function ConModule() {
   const { Button, Checkbox, Input, Select, Alert } = window.SUMARSEDesignSystem_6dc1cb;
@@ -77,9 +35,9 @@ function ConModule() {
   ];
 
   const info = [
-    { icon: 'map-pin', k: 'Dónde estamos', v: 'Saltillo, Coahuila, México' },
-    { icon: 'mail', k: 'Correo', v: 'contacto@redsumarse.org' },
-    { icon: 'phone', k: 'Teléfono', v: '(844) 000 0000' },
+    { icon: 'map-pin', k: 'Dónde estamos', v: 'Blvd. Venustiano Carranza 2905-A, Col. La Salle, Saltillo, Coahuila. C.P. 25240' },
+    { icon: 'mail', k: 'Correo', v: 'contacto@redsumarse.info' },
+    { icon: 'phone', k: 'Teléfono', v: '(844) 592-3466' },
   ];
 
   const textareaStyle = {
@@ -95,11 +53,15 @@ function ConModule() {
       <section style={{ background: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
         {!mobile && <Mosaic size={240} color="var(--lavender)" style={{ position: 'absolute', top: -36, right: -48, opacity: 0.85 }} />}
         <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter) var(--space-6)', position: 'relative' }}>
-          <CEyebrow>Contacto</CEyebrow>
-          <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04, letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0' }}>Hablemos</h1>
-          <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 560 }}>
-            ¿Tu empresa quiere sumar, te interesa el voluntariado o tienes una pregunta? Escríbenos y te respondemos pronto.
-          </p>
+          <window.SumaReveal>
+            <CEyebrow>Contacto</CEyebrow>
+            <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04, letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0' }}>Hablemos</h1>
+          </window.SumaReveal>
+          <window.SumaReveal delay={120}>
+            <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.6, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 560 }}>
+              ¿Tu empresa quiere sumar, te interesa el voluntariado o tienes una pregunta? Escríbenos y te respondemos pronto.
+            </p>
+          </window.SumaReveal>
         </div>
       </section>
 
@@ -110,6 +72,7 @@ function ConModule() {
           display: 'grid', gridTemplateColumns: mobile ? 'minmax(0, 1fr)' : '1.1fr 0.9fr', gap: mobile ? 24 : 48, alignItems: 'start',
         }}>
           {/* LEFT — form */}
+          <window.SumaReveal y={24} style={{ minWidth: 0 }}>
           <div style={{ background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-sm)', padding: 'var(--space-8)' }}>
             {sent ? (
               <div style={{ textAlign: 'center', padding: 'var(--space-7) 0' }}>
@@ -151,9 +114,11 @@ function ConModule() {
               </React.Fragment>
             )}
           </div>
+          </window.SumaReveal>
 
-          {/* RIGHT — info */}
+          {/* RIGHT — info (sticky container — do NOT wrap it in SumaReveal) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, position: mobile ? 'static' : 'sticky', top: 90 }}>
+            <window.SumaReveal delay={100}>
             <div style={{ background: 'var(--honey-flower)', borderRadius: 'var(--radius-xl)', padding: 'var(--space-7)', position: 'relative', overflow: 'hidden' }}>
               <Mosaic size={140} color="rgba(226,211,0,0.16)" style={{ position: 'absolute', top: -16, right: -16 }} />
               <div style={{ position: 'relative' }}>
@@ -176,76 +141,30 @@ function ConModule() {
                   Escríbenos por WhatsApp
                 </Button>
                 <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
-                  {['instagram', 'facebook', 'linkedin'].map((n) => (
-                    <a key={n} href="#" onClick={(e) => e.preventDefault()} aria-label={n} style={{
+                  {[
+                    { name: 'instagram', href: 'https://www.instagram.com/redsumarsecoahuila/' },
+                    { name: 'facebook', href: 'https://www.facebook.com/RedSumaRSE/' },
+                    { name: 'linkedin', href: 'https://www.linkedin.com/company/red-sumarse-coahuila/' },
+                  ].map((s) => (
+                    <a key={s.name} href={s.href} target="_blank" rel="noopener" aria-label={s.name} style={{
                       width: 40, height: 40, borderRadius: 'var(--radius-md)', display: 'inline-flex',
                       alignItems: 'center', justifyContent: 'center', color: 'var(--purple-900)', background: 'var(--sunflower)',
-                    }}><Icon name={n} size={20} /></a>
+                    }}><Icon name={s.name} size={20} /></a>
                   ))}
                 </div>
               </div>
             </div>
-            <Photo tone="lavender" label="Saltillo, Coahuila" style={{ height: 200 }} />
-            <Alert variant="info" icon={<Icon name="check-circle" size={20} />}>Respondemos en un plazo de 2 a 3 días hábiles.</Alert>
+            </window.SumaReveal>
+            <window.SumaReveal delay={200}>
+              <Photo tone="lavender" label="Saltillo, Coahuila" style={{ height: 200 }} />
+            </window.SumaReveal>
+            <window.SumaReveal delay={300}>
+              <Alert variant="info" icon={<Icon name="check-circle" size={20} />}>Respondemos en un plazo de 2 a 3 días hábiles.</Alert>
+            </window.SumaReveal>
           </div>
         </div>
       </section>
     </React.Fragment>
-  );
-}
-
-/* ---------- FOOTER ---------- */
-function ConFooter() {
-  const Icon = window.SumaIcon;
-  const col = (title, items) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{title}</div>
-      {items.map((it) => (
-        <a key={it.label} href={it.href || '#'} onClick={it.href ? undefined : (e) => e.preventDefault()}
-          style={{ color: 'var(--purple-100)', textDecoration: 'none', fontSize: 'var(--size-base)' }}>{it.label}</a>
-      ))}
-    </div>
-  );
-  return (
-    <footer style={{ background: 'var(--purple-800)', color: 'var(--canvas-white)' }}>
-      <div style={{
-        maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-8) var(--gutter) var(--space-6)',
-        display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1.1fr', gap: 40,
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 320 }}>
-          <window.SumaFooterBrand />
-          <p style={{ margin: 0, color: 'var(--purple-100)', lineHeight: 1.6, fontSize: 'var(--size-base)' }}>
-            Red de empresas socialmente responsables de Coahuila. Donde hay unidad, siempre hay victoria.
-          </p>
-          <div style={{ display: 'flex', gap: 10 }}>
-            {['instagram', 'facebook', 'linkedin'].map((n) => (
-              <a key={n} href="#" onClick={(e) => e.preventDefault()} aria-label={n} style={{
-                width: 38, height: 38, borderRadius: 'var(--radius-md)', display: 'inline-flex',
-                alignItems: 'center', justifyContent: 'center', color: 'var(--purple-900)', background: 'var(--sunflower)',
-              }}><Icon name={n} size={20} /></a>
-            ))}
-          </div>
-        </div>
-        {col('Red', [{ label: 'Quiénes somos', href: HOME + '#quienes' }, { label: 'Iniciativas', href: 'Iniciativas.html' }, { label: 'Resultados', href: HOME + '#resultados' }, { label: 'Nosotros', href: 'Nosotros.html' }])}
-        {col('Impacto', [{ label: 'Economía' }, { label: 'Sociedad' }, { label: 'Medio ambiente' }, { label: 'Transparencia' }])}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Contacto</div>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="map-pin" size={18} /> Saltillo, Coahuila</span>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="mail" size={18} /> contacto@redsumarse.org</span>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="phone" size={18} /> (844) 000 0000</span>
-        </div>
-      </div>
-      <div style={{ borderTop: '1px solid var(--purple-700)' }}>
-        <div style={{
-          maxWidth: 'var(--container-max)', margin: '0 auto', padding: '18px var(--gutter)',
-          display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12,
-          color: 'var(--purple-200)', fontSize: 'var(--size-sm)',
-        }}>
-          <span>© 2026 Red SUMA RSE Coahuila.</span>
-          <span>Aviso de privacidad · Términos</span>
-        </div>
-      </div>
-    </footer>
   );
 }
 

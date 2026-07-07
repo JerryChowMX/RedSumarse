@@ -1,10 +1,4 @@
 // Red SUMA RSE Coahuila — landing page sections
-const RSE_NAV = [
-  { id: 'inicio', label: 'Inicio', current: true },
-  { href: 'Iniciativas.html', label: 'Iniciativas' },
-  { href: 'Nosotros.html', label: 'Nosotros' },
-];
-
 function Eyebrow({ children, onDark }) {
   return (
     <span style={{
@@ -14,52 +8,6 @@ function Eyebrow({ children, onDark }) {
     }}>
       <span style={{ width: 8, height: 8, background: 'var(--sunflower)', borderRadius: 2 }} />{children}
     </span>
-  );
-}
-
-function goToSection(id) {
-  // Use the browser's native anchor navigation (robust across contexts).
-  if (window.location.hash === '#' + id) window.location.hash = '';
-  window.location.hash = '#' + id;
-}
-
-/* ---------- HEADER ---------- */
-function RseHeader() {
-  const { Button } = window.SUMARSEDesignSystem_6dc1cb;
-  const Icon = window.SumaIcon;
-  return (
-    <header style={{
-      position: 'sticky', top: 0, zIndex: 30,
-      background: 'color-mix(in srgb, var(--canvas-white) 88%, transparent)',
-      backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border-subtle)',
-    }}>
-      <div style={{
-        maxWidth: 'var(--container-max)', margin: '0 auto', padding: '14px var(--gutter)',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
-      }}>
-        <a href="#inicio" style={{ display: 'flex' }}>
-          <window.SumaLogo height={38} />
-        </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          {RSE_NAV.map((l) => (
-            <a key={l.label} href={l.href || `#${l.id}`}
-              style={{
-                padding: '8px 14px', borderRadius: 'var(--radius-md)', textDecoration: 'none',
-                fontFamily: 'var(--font-text)', fontSize: 'var(--size-base)', fontWeight: l.current ? 700 : 500,
-                color: l.current ? 'var(--text-heading)' : 'var(--text-body)',
-                background: l.current ? 'var(--surface-soft)' : 'transparent',
-              }}
-              onMouseEnter={(e) => { if (!l.current) e.currentTarget.style.background = 'var(--surface-soft)'; }}
-              onMouseLeave={(e) => { if (!l.current) e.currentTarget.style.background = 'transparent'; }}
-            >{l.label}</a>
-          ))}
-        </nav>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <Button variant="secondary" size="sm" onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
-          <Button variant="cta" size="sm" leadingIcon={<Icon name="heart" size={16} />} onClick={() => { window.location.href = 'Donar.html'; }}>Donar</Button>
-        </div>
-      </div>
-    </header>
   );
 }
 
@@ -78,25 +26,35 @@ function RseHero() {
         display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.05fr 0.95fr', gap: mobile ? 36 : 56, alignItems: 'center', position: 'relative',
       }}>
         <div>
-          <Eyebrow>Red de empresas socialmente responsables · Coahuila</Eyebrow>
-          <h1 style={{
-            fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04,
-            letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0',
-          }}>{mobile ? 'Sumamos empresas que transforman Coahuila' : <React.Fragment>Sumamos empresas que<br/>transforman Coahuila</React.Fragment>}</h1>
-          <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.55, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 500 }}>
-            Unimos a empresas comprometidas con la responsabilidad social para crear un impacto positivo en la economía, la sociedad y el medio ambiente.
-          </p>
-          <window.SumaButtonRow style={{ marginTop: 30 }}>
-            <Button variant="cta" size="lg" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Iniciativas.html'; }}>Conocer iniciativas</Button>
-            <Button variant="secondary" size="lg" leadingIcon={<Icon name="mail" size={18} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
-          </window.SumaButtonRow>
-          <div style={{ display: 'flex', gap: 28, marginTop: 38 }}>
-            <Stat value="9.2K" label="personas beneficiadas" />
-            <div style={{ width: 1, background: 'var(--border-default)' }} />
-            <Stat value="$4.2 MDP" label="inversión social" />
-          </div>
+          <window.SumaReveal>
+            <Eyebrow>Red de empresas socialmente responsables · Coahuila</Eyebrow>
+            <h1 style={{
+              fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-display)', lineHeight: 1.04,
+              letterSpacing: '-0.02em', color: 'var(--text-heading)', margin: '18px 0 0',
+            }}>{mobile ? 'Sumamos empresas que transforman Coahuila' : <React.Fragment>Sumamos empresas que<br/>transforman Coahuila</React.Fragment>}</h1>
+          </window.SumaReveal>
+          <window.SumaReveal delay={120}>
+            <p style={{ fontSize: 'var(--size-lg)', lineHeight: 1.55, color: 'var(--text-body)', margin: '20px 0 0', maxWidth: 500 }}>
+              Impulsamos la sostenibilidad, el liderazgo empresarial y el impacto colectivo en Coahuila. Unimos a empresas comprometidas con la cultura Ambiental, Social y de Gobernanza (ASG).
+            </p>
+          </window.SumaReveal>
+          <window.SumaReveal delay={240}>
+            <window.SumaButtonRow style={{ marginTop: 30 }}>
+              <Button variant="cta" size="lg" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Iniciativas.html'; }}>Conocer iniciativas</Button>
+              <Button variant="secondary" size="lg" leadingIcon={<Icon name="mail" size={18} />} onClick={() => { window.location.href = 'Contacto.html'; }}>Contacto</Button>
+            </window.SumaButtonRow>
+          </window.SumaReveal>
+          <window.SumaReveal delay={360}>
+            <div style={{ display: 'flex', gap: 28, marginTop: 38 }}>
+              <Stat value={<window.SumaCountUp value="9.2K" />} label="personas beneficiadas" />
+              <div style={{ width: 1, background: 'var(--border-default)' }} />
+              <Stat value={<window.SumaCountUp value="$4.2 MDP" />} label="inversión social" />
+            </div>
+          </window.SumaReveal>
         </div>
-        <Photo tone="purple" label="Comunidad · Coahuila" style={{ height: mobile ? 300 : 460 }} />
+        <window.SumaReveal delay={150} y={28}>
+          <Photo tone="purple" label="Comunidad · Coahuila" style={{ height: mobile ? 300 : 460 }} />
+        </window.SumaReveal>
       </div>
     </section>
   );
@@ -104,6 +62,8 @@ function RseHero() {
 
 /* ---------- ALIADOS (member / affiliate logos) ---------- */
 function RseAfiliados() {
+  const { Button } = window.SUMARSEDesignSystem_6dc1cb;
+  const Icon = window.SumaIcon;
   const aliados = [
     { name: 'Aguas de Saltillo', file: 'Aguas_de_Saltillo.png' },
     { name: 'Arca Continental', file: 'Arca_Continental.png' },
@@ -118,6 +78,7 @@ function RseAfiliados() {
     { name: 'Magna', file: 'Magna.png' },
     { name: 'Vanguardia MX', file: 'Vanguardia_MX.png' },
   ];
+  const mobile = window.useIsMobile();
   const enter = (e) => {
     e.currentTarget.style.boxShadow = 'var(--shadow-md)';
     e.currentTarget.style.transform = 'translateY(-3px)';
@@ -171,7 +132,7 @@ function RseAfiliados() {
   }, []);
 
   const card = (a, key) => (
-    <div key={key} title={a.name} onMouseEnter={enter} onMouseLeave={leave} style={{
+    <div key={key} title={a.name} onMouseEnter={mobile ? undefined : enter} onMouseLeave={mobile ? undefined : leave} style={{
       flex: 'none', width: 188, height: 104,
       background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)',
       border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)',
@@ -180,7 +141,8 @@ function RseAfiliados() {
     }}>
       <img src={`assets/afiliados/${a.file}`} alt={a.name} loading="lazy" style={{
         maxWidth: '100%', maxHeight: 64, width: 'auto', height: 'auto', objectFit: 'contain', display: 'block',
-        filter: 'grayscale(100%)', opacity: 0.72,
+        // Touch has no hover to reveal color — show logos in full color on mobile.
+        filter: mobile ? 'none' : 'grayscale(100%)', opacity: mobile ? 1 : 0.72,
         transition: 'filter var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out)',
       }} />
     </div>
@@ -195,7 +157,7 @@ function RseAfiliados() {
   return (
     <section ref={sectionRef} id="aliados" style={{ background: 'var(--lavender)', overflow: 'hidden' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-9) var(--gutter) var(--space-7)' }}>
-        <div style={{ textAlign: 'center' }}>
+        <window.SumaReveal style={{ textAlign: 'center' }}>
           <Eyebrow>Aliados</Eyebrow>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>
             Empresas que ya suman
@@ -203,7 +165,10 @@ function RseAfiliados() {
           <p style={{ color: 'var(--text-muted)', fontSize: 'var(--size-lg)', lineHeight: 1.55, margin: '14px auto 0', maxWidth: 560 }}>
             Organizaciones de Coahuila comprometidas con la responsabilidad social que hacen posible el trabajo de la Red.
           </p>
-        </div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 18 }}>
+            <Button variant="ghost" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Aliados.html'; }}>Ver todos los aliados</Button>
+          </div>
+        </window.SumaReveal>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '0 0 var(--space-9)' }}>
         <div ref={row1Ref} style={rowStyle}>{fill(rowA).map((a, i) => card(a, 'a' + i))}</div>
@@ -227,18 +192,20 @@ function RseResultados() {
     <section id="resultados" style={{ background: 'var(--honey-flower)', color: 'var(--canvas-white)', position: 'relative', overflow: 'hidden' }}>
       <Mosaic size={200} color="rgba(226,211,0,0.16)" style={{ position: 'absolute', top: -24, left: '6%' }} />
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-9) var(--gutter)', position: 'relative' }}>
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-7)' }}>
+        <window.SumaReveal style={{ textAlign: 'center', marginBottom: 'var(--space-7)' }}>
           <Eyebrow onDark>Resultados</Eyebrow>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--canvas-white)', margin: '12px 0 0' }}>
             Compromiso que se vuelve impacto real
           </h2>
-        </div>
+        </window.SumaReveal>
         <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : 'repeat(4,1fr)', gap: 24 }}>
-          {metrics.map((m) => (
-            <div key={m.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 6 }}>
-              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h1)', lineHeight: 1, letterSpacing: '-0.02em', color: 'var(--sunflower)' }}>{m.value}</span>
-              <span style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 'var(--size-md)', color: 'var(--purple-100)' }}>{m.label}</span>
-            </div>
+          {metrics.map((m, i) => (
+            <window.SumaReveal key={m.label} delay={i * 90}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: 6 }}>
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h1)', lineHeight: 1, letterSpacing: '-0.02em', color: 'var(--sunflower)' }}><window.SumaCountUp value={m.value} /></span>
+                <span style={{ fontFamily: 'var(--font-text)', fontWeight: 600, fontSize: 'var(--size-md)', color: 'var(--purple-100)' }}>{m.label}</span>
+              </div>
+            </window.SumaReveal>
           ))}
         </div>
       </div>
@@ -252,7 +219,7 @@ function RseQuienes() {
   const Photo = window.SumaPhoto;
   const Icon = window.SumaIcon;
   const blocks = [
-    { kicker: 'Quiénes somos', icon: 'building', text: 'Una red de empresas de Coahuila unidas por la responsabilidad social empresarial, que deciden trabajar juntas en lugar de hacerlo por separado.' },
+    { kicker: 'Quiénes somos', icon: 'building', text: 'Una red de empresas de Coahuila unidas por la sostenibilidad y la cultura ASG (Ambiental, Social y de Gobernanza), que deciden trabajar juntas en lugar de hacerlo por separado.' },
     { kicker: 'Qué hacemos', icon: 'target', text: 'Convertimos el compromiso de cada empresa en inversión social, programas educativos y alianzas con impacto medible en la comunidad.' },
     { kicker: 'Por qué lo hacemos', icon: 'heart', text: 'Porque creemos que cuando las empresas suman, la economía, la sociedad y el medio ambiente avanzan al mismo tiempo.' },
   ];
@@ -263,13 +230,15 @@ function RseQuienes() {
         display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.05fr 0.95fr', gap: 56, alignItems: 'center',
       }}>
         <div>
-          <Eyebrow>Quiénes somos</Eyebrow>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 8px' }}>
-            Una red, un mismo propósito
-          </h2>
+          <window.SumaReveal>
+            <Eyebrow>Quiénes somos</Eyebrow>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 8px' }}>
+              Una red, un mismo propósito
+            </h2>
+          </window.SumaReveal>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 22, marginTop: 28 }}>
-            {blocks.map((b) => (
-              <div key={b.kicker} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+            {blocks.map((b, i) => (
+              <window.SumaReveal key={b.kicker} delay={i * 110} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                 <div style={{
                   width: 46, height: 46, flex: 'none', borderRadius: 'var(--radius-md)',
                   background: 'var(--purple-50)', color: 'var(--purple-600)',
@@ -281,11 +250,13 @@ function RseQuienes() {
                   <div style={{ fontFamily: 'var(--font-text)', fontWeight: 700, fontSize: 13, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--honey-flower)', marginBottom: 4 }}>{b.kicker}</div>
                   <p style={{ margin: 0, color: 'var(--text-body)', lineHeight: 1.6, fontSize: 'var(--size-md)', maxWidth: 460 }}>{b.text}</p>
                 </div>
-              </div>
+              </window.SumaReveal>
             ))}
           </div>
         </div>
-        <Photo tone="lavender" label="Empresas de la Red" style={{ height: 420 }} />
+        <window.SumaReveal delay={150}>
+          <Photo tone="lavender" label="Empresas de la Red" style={{ height: 420 }} />
+        </window.SumaReveal>
       </div>
     </section>
   );
@@ -311,7 +282,7 @@ function RseIniciativas() {
   return (
     <section id="iniciativas" style={{ background: 'var(--lavender)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)' }}>
-        <div style={{ display: 'flex', flexDirection: mobile ? 'column' : 'row', alignItems: mobile ? 'flex-start' : 'flex-end', justifyContent: 'space-between', gap: mobile ? 14 : 24, marginBottom: 'var(--space-7)' }}>
+        <window.SumaReveal style={{ display: 'flex', flexDirection: mobile ? 'column' : 'row', alignItems: mobile ? 'flex-start' : 'flex-end', justifyContent: 'space-between', gap: mobile ? 14 : 24, marginBottom: 'var(--space-7)' }}>
           <div style={{ maxWidth: 640 }}>
             <Eyebrow>Iniciativas</Eyebrow>
             <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>
@@ -322,13 +293,14 @@ function RseIniciativas() {
             </p>
           </div>
           <Button variant="ghost" trailingIcon={<Icon name="arrow-right" size={18} />} onClick={() => { window.location.href = 'Iniciativas.html'; }}>Ver todas</Button>
-        </div>
+        </window.SumaReveal>
 
         {/* Featured active initiative */}
+        <window.SumaReveal y={26} style={{ marginBottom: 20 }}>
         <div style={{
           background: 'var(--surface-card)', borderRadius: 'var(--radius-xl)', overflow: 'hidden',
           border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-md)',
-          display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.15fr 0.85fr', alignItems: 'stretch', marginBottom: 20,
+          display: 'grid', gridTemplateColumns: mobile ? '1fr' : '1.15fr 0.85fr', alignItems: 'stretch',
         }}>
           <div style={{ padding: 'var(--space-8)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18 }}>
@@ -361,13 +333,15 @@ function RseIniciativas() {
             </div>
           </div>
         </div>
+        </window.SumaReveal>
 
         {/* Completed initiatives */}
         <div style={{ display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(2,1fr)', gap: 20 }}>
-          {completed.map((c) => (
-            <div key={c.version} onClick={() => { window.location.href = c.file; }} style={{
+          {completed.map((c, i) => (
+            <window.SumaReveal key={c.version} delay={i * 110}>
+            <div onClick={() => { window.location.href = c.file; }} style={{
               background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-7)',
-              border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)', cursor: 'pointer',
+              border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)', cursor: 'pointer', height: '100%', boxSizing: 'border-box',
               display: 'flex', gap: 22, alignItems: 'flex-start', transition: 'box-shadow var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out)',
             }}
               onMouseEnter={(e) => { e.currentTarget.style.boxShadow = 'var(--shadow-md)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
@@ -391,6 +365,7 @@ function RseIniciativas() {
                 )}
               </div>
             </div>
+            </window.SumaReveal>
           ))}
         </div>
       </div>
@@ -404,10 +379,11 @@ function RseHistoria() {
   const Icon = window.SumaIcon;
   const Mosaic = window.SumaMosaic;
   const milestones = [
-    { year: '2019', title: 'Nace la Red', desc: 'Las primeras empresas fundadoras se suman en Saltillo con una idea: hacer más, juntas.' },
-    { year: '2021', title: 'Gobernanza y comités', desc: 'Se conforman los comités de trabajo y la primera estructura de gobernanza de la Red.' },
-    { year: '2023', title: 'Inversión social multifase', desc: 'Arrancan los programas educativos y ambientales con financiamiento por etapas.' },
-    { year: '2025', title: 'Una comunidad que crece', desc: '+12 miembros del equipo y +400 educadores acompañan a la comunidad de Coahuila.' },
+    { year: '2015', title: 'Nace la Red', desc: 'Firma del convenio de integración de la Red SumaRSE Coahuila.' },
+    { year: '2017', title: 'Iniciativa 1.0', desc: 'Lanzamiento de la primera iniciativa de impacto colectivo: Zapalinamé como tu salón de clases.' },
+    { year: '2019', title: 'Iniciativa 2.0', desc: 'Formación de brigadistas juveniles e infantiles y guardaparques.' },
+    { year: '2024', title: 'Iniciativa 3.0', desc: 'Arranque operativo de Educar para el Bienestar junto a AtentaMente.' },
+    { year: '2026', title: 'Nueva estrategia', desc: 'Transición hacia la sostenibilidad empresarial, los criterios ASG y el impacto medible.' },
   ];
   return (
     <section id="historia" style={{ background: 'var(--canvas-white)' }}>
@@ -415,25 +391,25 @@ function RseHistoria() {
         maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)',
         display: 'grid', gridTemplateColumns: mobile ? '1fr' : '0.9fr 1.1fr', gap: 56, alignItems: 'flex-start',
       }}>
-        <div style={{ position: 'relative' }}>
+        <window.SumaReveal style={{ position: 'relative' }}>
           <Eyebrow>Nuestra historia</Eyebrow>
           <Icon name="quote" size={44} style={{ color: 'var(--sunflower)', marginTop: 18 }} />
           <blockquote style={{
             fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--fs-h2)', lineHeight: 1.15,
             letterSpacing: '-0.01em', color: 'var(--text-heading)', margin: '14px 0 0',
           }}>
-            Donde hay unidad, siempre hay victoria.
+            Sumando para transformar.
           </blockquote>
           <p style={{ color: 'var(--text-body)', fontSize: 'var(--size-md)', lineHeight: 1.65, margin: '24px 0 0', maxWidth: 420 }}>
-            A lo largo de los años, la Red ha fortalecido su gobernanza, evolucionado sus comités de trabajo y lanzado iniciativas de inversión social en múltiples fases. Cada empresa que se suma vuelve más sólida a toda la comunidad.
+            Desde 2015, la Red ha evolucionado: fortaleció su gobernanza, lanzó iniciativas de impacto colectivo en múltiples fases y hoy transita hacia la sostenibilidad y los criterios ASG. Cada empresa que se suma vuelve más sólida a toda la comunidad.
           </p>
           <Mosaic size={150} color="var(--lavender)" style={{ marginTop: 36 }} />
-        </div>
+        </window.SumaReveal>
         <div style={{ position: 'relative', paddingLeft: 6 }}>
           <div style={{ position: 'absolute', left: 13, top: 8, bottom: 8, width: 2, background: 'var(--border-default)' }} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-            {milestones.map((m) => (
-              <div key={m.year} style={{ display: 'grid', gridTemplateColumns: '28px 1fr', gap: 20, alignItems: 'flex-start', position: 'relative' }}>
+            {milestones.map((m, i) => (
+              <window.SumaReveal key={m.year} delay={i * 100} style={{ display: 'grid', gridTemplateColumns: '28px 1fr', gap: 20, alignItems: 'flex-start', position: 'relative' }}>
                 <span style={{
                   width: 28, height: 28, borderRadius: '50%', background: 'var(--sunflower)',
                   border: '3px solid var(--canvas-white)', boxShadow: '0 0 0 1px var(--border-default)',
@@ -444,7 +420,7 @@ function RseHistoria() {
                   <div style={{ fontWeight: 700, color: 'var(--text-body)', margin: '8px 0 4px', fontSize: 'var(--size-md)' }}>{m.title}</div>
                   <p style={{ margin: 0, color: 'var(--text-muted)', lineHeight: 1.6 }}>{m.desc}</p>
                 </div>
-              </div>
+              </window.SumaReveal>
             ))}
           </div>
         </div>
@@ -461,6 +437,7 @@ function RseCTA() {
   return (
     <section id="contacto" style={{ background: 'var(--canvas-white)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: '0 var(--gutter) var(--section-y)' }}>
+        <window.SumaReveal y={30}>
         <div style={{
           background: 'var(--plum-gray)', borderRadius: 'var(--radius-xl)', overflow: 'hidden', position: 'relative',
           padding: 'var(--space-9) var(--space-8)', textAlign: 'center',
@@ -480,63 +457,9 @@ function RseCTA() {
             </div>
           </div>
         </div>
+        </window.SumaReveal>
       </div>
     </section>
-  );
-}
-
-/* ---------- FOOTER ---------- */
-function RseFooter() {
-  const Icon = window.SumaIcon;
-  const col = (title, items) => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>{title}</div>
-      {items.map((it) => (
-        <a key={it.label} href={it.href || `#${it.id || ''}`}
-          style={{ color: 'var(--purple-100)', textDecoration: 'none', fontSize: 'var(--size-base)' }}>{it.label}</a>
-      ))}
-    </div>
-  );
-  return (
-    <footer style={{ background: 'var(--purple-800)', color: 'var(--canvas-white)' }}>
-      <div style={{
-        maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--space-8) var(--gutter) var(--space-6)',
-        display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1.1fr', gap: 40,
-      }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 320 }}>
-          <window.SumaFooterBrand />
-          <p style={{ margin: 0, color: 'var(--purple-100)', lineHeight: 1.6, fontSize: 'var(--size-base)' }}>
-            Red de empresas socialmente responsables de Coahuila. Donde hay unidad, siempre hay victoria.
-          </p>
-          <div style={{ display: 'flex', gap: 10 }}>
-            {['instagram', 'facebook', 'linkedin'].map((n) => (
-              <a key={n} href="#" onClick={(e) => e.preventDefault()} aria-label={n} style={{
-                width: 38, height: 38, borderRadius: 'var(--radius-md)', display: 'inline-flex',
-                alignItems: 'center', justifyContent: 'center', color: 'var(--purple-900)', background: 'var(--sunflower)',
-              }}><Icon name={n} size={20} /></a>
-            ))}
-          </div>
-        </div>
-        {col('Red', [{ label: 'Quiénes somos', id: 'quienes' }, { label: 'Aliados', id: 'aliados' }, { label: 'Iniciativas', href: 'Iniciativas.html' }, { label: 'Resultados', id: 'resultados' }, { label: 'Historia', id: 'historia' }])}
-        {col('Impacto', [{ label: 'Economía' }, { label: 'Sociedad' }, { label: 'Medio ambiente' }, { label: 'Transparencia' }])}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--sunflower)', textTransform: 'uppercase', letterSpacing: '.1em' }}>Contacto</div>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="map-pin" size={18} /> Saltillo, Coahuila</span>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="mail" size={18} /> contacto@redsumarse.org</span>
-          <span style={{ display: 'flex', gap: 8, color: 'var(--purple-100)', fontSize: 'var(--size-base)' }}><Icon name="phone" size={18} /> (844) 000 0000</span>
-        </div>
-      </div>
-      <div style={{ borderTop: '1px solid var(--purple-700)' }}>
-        <div style={{
-          maxWidth: 'var(--container-max)', margin: '0 auto', padding: '18px var(--gutter)',
-          display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12,
-          color: 'var(--purple-200)', fontSize: 'var(--size-sm)',
-        }}>
-          <span>© 2026 Red SUMA RSE Coahuila.</span>
-          <span>Aviso de privacidad · Términos</span>
-        </div>
-      </div>
-    </footer>
   );
 }
 
