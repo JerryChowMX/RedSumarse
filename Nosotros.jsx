@@ -163,8 +163,9 @@ function NosTeam() {
     { name: 'Ana Cecy Mata', role: 'Vicepresidenta', organization: 'Universidad Carolina', photo: 'ana-cecy-mata.webp' },
     { name: 'Alejandro Eichelmann', role: 'Vicepresidente', organization: 'Eichelmann Asesores', photo: 'alejandro-eichelmann.webp' },
     { name: 'Juan Manuel Pérez Cuéllar', role: 'Tesorero', organization: 'Fundación Merced Coahuila', photo: 'juan-manuel-perez.webp' },
-    { name: 'Mariana Wheelock', role: 'Consejera', photo: 'mariana-wheelock.webp' },
-    { name: 'Mireya Plata', role: 'Consejera honoraria · Voluntariado', photo: 'mireya-plata.webp' },
+    { name: 'Mariana Wheelock', role: 'Secretaria', photo: 'mariana-wheelock.webp' },
+    { name: 'Mireya Plata', role: 'Vocal', photo: 'mireya-plata.webp' },
+    { name: 'Elisa Valdés', role: 'Vocal', organization: 'AIERA', photo: 'elisa-valdez.webp' },
   ];
   const initials = (n) => n.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase();
   return (
@@ -179,9 +180,12 @@ function NosTeam() {
             Las personas que lideran la Red rumbo a una cultura ASG de clase mundial.
           </p>
         </window.SumaReveal>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(3,1fr)', gap: mobile ? 14 : 20 }}>
-          {team.map((m, i) => (
-            <window.SumaReveal key={m.name} delay={(i % 3) * 100} style={{ display: 'flex' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, minmax(0, 1fr))' : 'repeat(4,1fr)', gap: mobile ? 14 : 20 }}>
+          {team.map((m, i) => {
+            // On mobile (2 cols) an odd count leaves an orphan: stretch the last card.
+            const orphan = mobile && team.length % 2 === 1 && i === team.length - 1;
+            return (
+            <window.SumaReveal key={m.name} delay={(i % 4) * 90} style={{ display: 'flex', gridColumn: orphan ? 'span 2' : 'auto' }}>
             <div style={{
               background: 'var(--surface-card)', borderRadius: 'var(--radius-lg)', padding: 'var(--space-6)',
               border: '1px solid var(--border-subtle)', boxShadow: 'var(--shadow-xs)',
@@ -202,7 +206,8 @@ function NosTeam() {
               {m.organization && <div style={{ color: 'var(--text-muted)', fontSize: 'var(--size-sm)' }}>{m.organization}</div>}
             </div>
             </window.SumaReveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
