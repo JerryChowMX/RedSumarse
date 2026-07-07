@@ -42,6 +42,19 @@ const INICIATIVAS = {
     ],
     stat: { value: '+4,800', label: 'niñas y niños participantes' },
     gallery: ['Recorrido escolar', 'Sierra de Zapalinamé', 'Grupo de 5.º', 'Guías de la Red', 'Actividad al aire libre'],
+    // Real photos (assets/iniciativas/1-0). Gallery items may span grid cells (w/h).
+    photos: {
+      hero: { src: 'assets/iniciativas/1-0/recorrido-grupo.webp', alt: 'Recorrido escolar en la Sierra de Zapalinamé' },
+      gallery: [
+        { src: 'assets/iniciativas/1-0/lona-zapaliname.webp', alt: 'Zapalinamé como salón de clase', h: 2 },
+        { src: 'assets/iniciativas/1-0/presidium.webp', alt: 'Evento de arranque de la iniciativa', w: 2 },
+        { src: 'assets/iniciativas/1-0/asistentes.webp', alt: 'Niñas y niños participantes' },
+        { src: 'assets/iniciativas/1-0/canon-san-lorenzo.webp', alt: 'Visita al Cañón de San Lorenzo', w: 2 },
+        { src: 'assets/iniciativas/1-0/comitiva.webp', alt: 'Comitiva de la Red y aliados' },
+        { src: 'assets/iniciativas/1-0/caminata.webp', alt: 'Caminata por la sierra', h: 2 },
+        { src: 'assets/iniciativas/1-0/evento.webp', alt: 'Asistentes al evento' },
+      ],
+    },
   },
 };
 const ORDER = ['3-0', '2-0', '1-0'];
@@ -105,7 +118,12 @@ function DetHero({ d }) {
           </window.SumaReveal>
         </div>
         <window.SumaReveal delay={200} y={26}>
-          <Photo tone={d.active ? 'purple' : 'lavender'} label={d.gallery[0]} style={{ height: 420 }} />
+          {d.photos
+            ? <img src={d.photos.hero.src} alt={d.photos.hero.alt} style={{
+                width: '100%', height: mobile ? 300 : 420, objectFit: 'cover', display: 'block',
+                borderRadius: 'var(--radius-xl)', boxShadow: 'var(--shadow-md)',
+              }} />
+            : <Photo tone={d.active ? 'purple' : 'lavender'} label={d.gallery[0]} style={{ height: 420 }} />}
         </window.SumaReveal>
       </div>
     </section>
@@ -181,6 +199,10 @@ function DetGallery({ d }) {
   const mobile = window.useIsMobile();
   const Photo = window.SumaPhoto;
   const tones = ['purple', 'lavender', 'lavender', 'plum', 'lavender'];
+  const imgStyle = {
+    width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+    borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-xs)',
+  };
   return (
     <section style={{ background: 'var(--canvas-white)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 'var(--section-y) var(--gutter)' }}>
@@ -188,26 +210,46 @@ function DetGallery({ d }) {
           <DEyebrow>Galería</DEyebrow>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-h2)', color: 'var(--text-heading)', margin: '12px 0 0' }}>Imágenes de la iniciativa</h2>
         </window.SumaReveal>
-        <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gridAutoRows: '200px', gap: 14 }}>
-          <window.SumaReveal y={26} style={{ gridColumn: 'span 2', gridRow: 'span 2' }}>
-            <Photo tone={tones[0]} label={d.gallery[0]} style={{ height: '100%' }} />
-          </window.SumaReveal>
-          <window.SumaReveal delay={90} y={26}>
-            <Photo tone={tones[1]} label={d.gallery[1]} style={{ height: '100%' }} />
-          </window.SumaReveal>
-          <window.SumaReveal delay={180} y={26}>
-            <Photo tone={tones[2]} label={d.gallery[2]} style={{ height: '100%' }} />
-          </window.SumaReveal>
-          <window.SumaReveal delay={90} y={26} style={{ gridColumn: 'span 2' }}>
-            <Photo tone={tones[3]} label={d.gallery[3]} style={{ height: '100%' }} />
-          </window.SumaReveal>
-          <window.SumaReveal delay={180} y={26}>
-            <Photo tone={tones[4]} label={d.gallery[4]} style={{ height: '100%' }} />
-          </window.SumaReveal>
-        </div>
-        <p style={{ color: 'var(--text-subtle)', fontSize: 'var(--size-sm)', margin: '16px 0 0' }}>
-          Las imágenes son marcadores de posición. Comparte las fotos reales de la iniciativa para colocarlas aquí.
-        </p>
+        {d.photos ? (
+          // Real photos: mosaic grid; w/h let an item span columns/rows, dense
+          // flow backfills the gaps so no cell is left empty mid-grid.
+          <div style={{
+            display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+            gridAutoRows: mobile ? '150px' : '210px', gridAutoFlow: 'dense', gap: 14,
+          }}>
+            {d.photos.gallery.map((ph, i) => (
+              <window.SumaReveal key={ph.src} delay={(i % 3) * 90} y={26} style={{
+                gridColumn: ph.w === 2 ? 'span 2' : 'auto',
+                gridRow: ph.h === 2 ? 'span 2' : 'auto',
+              }}>
+                <img src={ph.src} alt={ph.alt} title={ph.alt} loading="lazy" style={imgStyle} />
+              </window.SumaReveal>
+            ))}
+          </div>
+        ) : (
+          <React.Fragment>
+            <div style={{ display: 'grid', gridTemplateColumns: mobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gridAutoRows: '200px', gap: 14 }}>
+              <window.SumaReveal y={26} style={{ gridColumn: 'span 2', gridRow: 'span 2' }}>
+                <Photo tone={tones[0]} label={d.gallery[0]} style={{ height: '100%' }} />
+              </window.SumaReveal>
+              <window.SumaReveal delay={90} y={26}>
+                <Photo tone={tones[1]} label={d.gallery[1]} style={{ height: '100%' }} />
+              </window.SumaReveal>
+              <window.SumaReveal delay={180} y={26}>
+                <Photo tone={tones[2]} label={d.gallery[2]} style={{ height: '100%' }} />
+              </window.SumaReveal>
+              <window.SumaReveal delay={90} y={26} style={{ gridColumn: 'span 2' }}>
+                <Photo tone={tones[3]} label={d.gallery[3]} style={{ height: '100%' }} />
+              </window.SumaReveal>
+              <window.SumaReveal delay={180} y={26}>
+                <Photo tone={tones[4]} label={d.gallery[4]} style={{ height: '100%' }} />
+              </window.SumaReveal>
+            </div>
+            <p style={{ color: 'var(--text-subtle)', fontSize: 'var(--size-sm)', margin: '16px 0 0' }}>
+              Las imágenes son marcadores de posición. Comparte las fotos reales de la iniciativa para colocarlas aquí.
+            </p>
+          </React.Fragment>
+        )}
       </div>
     </section>
   );
