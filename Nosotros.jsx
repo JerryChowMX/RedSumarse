@@ -159,7 +159,7 @@ function NosValores() {
 function NosTeam() {
   const mobile = window.useIsMobile();
   const team = [
-    { name: 'Esteban Garza Fishburn', role: 'Presidente', photo: 'esteban-garza.webp' },
+    { name: 'Esteban Garza Fishburn', role: 'Presidente', organization: 'Universidad Carolina', photo: 'esteban-garza.webp' },
     { name: 'Ana Cecy Mata', role: 'Vicepresidenta', organization: 'Universidad Carolina', photo: 'ana-cecy-mata.webp' },
     { name: 'Alejandro Eichelmann', role: 'Vicepresidente', organization: 'Eichelmann Asesores', photo: 'alejandro-eichelmann.webp' },
     { name: 'Juan Manuel Pérez Cuéllar', role: 'Tesorero', organization: 'Fundación Merced Coahuila', photo: 'juan-manuel-perez.webp' },
