@@ -28,6 +28,21 @@ const INICIATIVAS = {
       'Cultura de conservación y cuidado del entorno.',
     ],
     gallery: ['Brigadistas en campo', 'Taller de formación', 'Guardaparques', 'Entorno natural', 'Jornada ambiental'],
+    photos: {
+      hero: { src: 'assets/iniciativas/2-0/brigadistas-panoramica.webp', alt: 'Brigadistas de la Iniciativa 2.0 en campo' },
+      gallery: [
+        { src: 'assets/iniciativas/2-0/antes-despues.webp', alt: 'Antes y después de la jornada de conservación', h: 2 },
+        { src: 'assets/iniciativas/2-0/reflejo-laguna.webp', alt: 'Brigada junto al cuerpo de agua', w: 2 },
+        { src: 'assets/iniciativas/2-0/sesion-campo.webp', alt: 'Sesión de formación en campo' },
+        { src: 'assets/iniciativas/2-0/caminata-sendero.webp', alt: 'Caminata por el sendero', w: 2 },
+        { src: 'assets/iniciativas/2-0/brigada-grupo.webp', alt: 'Brigadistas juveniles' },
+        { src: 'assets/iniciativas/2-0/brigada-arbol.webp', alt: 'Brigada en el entorno natural', h: 2 },
+        { src: 'assets/iniciativas/2-0/vista-saltillo.webp', alt: 'Vista de Saltillo desde la sierra', w: 2 },
+        { src: 'assets/iniciativas/2-0/trabajo-comunitario.webp', alt: 'Trabajo comunitario de conservación' },
+        { src: 'assets/iniciativas/2-0/recorrido-comunidad.webp', alt: 'Recorrido por la comunidad' },
+        { src: 'assets/iniciativas/2-0/camino-brigada.webp', alt: 'Brigada en camino rural' },
+      ],
+    },
   },
   '1-0': {
     file: 'Iniciativa-1-0.html', num: '1.0', version: 'Iniciativa 1.0', status: 'Terminada', active: false,
